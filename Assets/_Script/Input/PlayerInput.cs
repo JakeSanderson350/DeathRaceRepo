@@ -37,7 +37,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CameraLook"",
+                    ""name"": ""Look"",
                     ""type"": ""PassThrough"",
                     ""id"": ""ec8d9a5c-8bd9-4f51-a957-a41e5f18b282"",
                     ""expectedControlType"": ""Vector2"",
@@ -195,7 +195,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""ScaleVector2(x=0.01666667,y=0.01666667)"",
                     ""groups"": """",
-                    ""action"": ""CameraLook"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -206,7 +206,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraLook"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,7 +235,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StartRun"",
+                    ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""e2b344bc-7fd4-42d1-a0ec-fb0182ddd608"",
                     ""expectedControlType"": """",
@@ -296,7 +296,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartRun"",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -307,7 +307,152 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartRun"",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Driving"",
+            ""id"": ""d512a6a5-2056-4430-9b28-5a92a028a039"",
+            ""actions"": [
+                {
+                    ""name"": ""Steer"",
+                    ""type"": ""Value"",
+                    ""id"": ""70f4c9c3-874d-435f-8208-d4753686e82e"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Gas"",
+                    ""type"": ""Value"",
+                    ""id"": ""b0bcebac-474b-43b2-a919-58a8f02fc921"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Brake"",
+                    ""type"": ""Value"",
+                    ""id"": ""c57262c2-093a-4c75-b515-5bdfd546fa6b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a7688f74-2ef8-4051-a9e0-98214ebed08f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""107ecb94-e2e4-4a2c-b0cf-49e718ad1007"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""ab8a9ccf-02c9-44cf-87c9-4280ceb6ab4d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""8879eab7-0f27-466f-94e0-725242678e7c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6e8cc79c-030f-4c1f-89e6-c17d3148657a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5242a6a3-8fbc-4eba-96a8-b099b9671709"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""54fb87be-7fd0-4316-a88d-94dcfcd2757a"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""cde42aaa-7f93-4cc5-aaf6-036eeb78addd"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1942ab6-4fa8-4042-a725-25d87b63d4dc"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc36d9e6-b6b1-4e73-ba12-7e11940cdbb7"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -319,19 +464,25 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
-        m_Default_CameraLook = m_Default.FindAction("CameraLook", throwIfNotFound: true);
+        m_Default_Look = m_Default.FindAction("Look", throwIfNotFound: true);
         m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Mouse = m_Menu.FindAction("Mouse", throwIfNotFound: true);
         m_Menu_Menu = m_Menu.FindAction("Menu", throwIfNotFound: true);
-        m_Menu_StartRun = m_Menu.FindAction("StartRun", throwIfNotFound: true);
+        m_Menu_Start = m_Menu.FindAction("Start", throwIfNotFound: true);
+        // Driving
+        m_Driving = asset.FindActionMap("Driving", throwIfNotFound: true);
+        m_Driving_Steer = m_Driving.FindAction("Steer", throwIfNotFound: true);
+        m_Driving_Gas = m_Driving.FindAction("Gas", throwIfNotFound: true);
+        m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_Default.enabled, "This will cause a leak and performance issues, PlayerInput.Default.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Menu.enabled, "This will cause a leak and performance issues, PlayerInput.Menu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Driving.enabled, "This will cause a leak and performance issues, PlayerInput.Driving.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -394,14 +545,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Default;
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
     private readonly InputAction m_Default_Move;
-    private readonly InputAction m_Default_CameraLook;
+    private readonly InputAction m_Default_Look;
     private readonly InputAction m_Default_Jump;
     public struct DefaultActions
     {
         private @PlayerInput m_Wrapper;
         public DefaultActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Default_Move;
-        public InputAction @CameraLook => m_Wrapper.m_Default_CameraLook;
+        public InputAction @Look => m_Wrapper.m_Default_Look;
         public InputAction @Jump => m_Wrapper.m_Default_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
@@ -415,9 +566,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @CameraLook.started += instance.OnCameraLook;
-            @CameraLook.performed += instance.OnCameraLook;
-            @CameraLook.canceled += instance.OnCameraLook;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -428,9 +579,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @CameraLook.started -= instance.OnCameraLook;
-            @CameraLook.performed -= instance.OnCameraLook;
-            @CameraLook.canceled -= instance.OnCameraLook;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -457,14 +608,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
     private readonly InputAction m_Menu_Mouse;
     private readonly InputAction m_Menu_Menu;
-    private readonly InputAction m_Menu_StartRun;
+    private readonly InputAction m_Menu_Start;
     public struct MenuActions
     {
         private @PlayerInput m_Wrapper;
         public MenuActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Mouse => m_Wrapper.m_Menu_Mouse;
         public InputAction @Menu => m_Wrapper.m_Menu_Menu;
-        public InputAction @StartRun => m_Wrapper.m_Menu_StartRun;
+        public InputAction @Start => m_Wrapper.m_Menu_Start;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -480,9 +631,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
-            @StartRun.started += instance.OnStartRun;
-            @StartRun.performed += instance.OnStartRun;
-            @StartRun.canceled += instance.OnStartRun;
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -493,9 +644,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
-            @StartRun.started -= instance.OnStartRun;
-            @StartRun.performed -= instance.OnStartRun;
-            @StartRun.canceled -= instance.OnStartRun;
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -513,16 +664,84 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Driving
+    private readonly InputActionMap m_Driving;
+    private List<IDrivingActions> m_DrivingActionsCallbackInterfaces = new List<IDrivingActions>();
+    private readonly InputAction m_Driving_Steer;
+    private readonly InputAction m_Driving_Gas;
+    private readonly InputAction m_Driving_Brake;
+    public struct DrivingActions
+    {
+        private @PlayerInput m_Wrapper;
+        public DrivingActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Steer => m_Wrapper.m_Driving_Steer;
+        public InputAction @Gas => m_Wrapper.m_Driving_Gas;
+        public InputAction @Brake => m_Wrapper.m_Driving_Brake;
+        public InputActionMap Get() { return m_Wrapper.m_Driving; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DrivingActions set) { return set.Get(); }
+        public void AddCallbacks(IDrivingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DrivingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DrivingActionsCallbackInterfaces.Add(instance);
+            @Steer.started += instance.OnSteer;
+            @Steer.performed += instance.OnSteer;
+            @Steer.canceled += instance.OnSteer;
+            @Gas.started += instance.OnGas;
+            @Gas.performed += instance.OnGas;
+            @Gas.canceled += instance.OnGas;
+            @Brake.started += instance.OnBrake;
+            @Brake.performed += instance.OnBrake;
+            @Brake.canceled += instance.OnBrake;
+        }
+
+        private void UnregisterCallbacks(IDrivingActions instance)
+        {
+            @Steer.started -= instance.OnSteer;
+            @Steer.performed -= instance.OnSteer;
+            @Steer.canceled -= instance.OnSteer;
+            @Gas.started -= instance.OnGas;
+            @Gas.performed -= instance.OnGas;
+            @Gas.canceled -= instance.OnGas;
+            @Brake.started -= instance.OnBrake;
+            @Brake.performed -= instance.OnBrake;
+            @Brake.canceled -= instance.OnBrake;
+        }
+
+        public void RemoveCallbacks(IDrivingActions instance)
+        {
+            if (m_Wrapper.m_DrivingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDrivingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DrivingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DrivingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DrivingActions @Driving => new DrivingActions(this);
     public interface IDefaultActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnCameraLook(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
         void OnMouse(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnStartRun(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
+    }
+    public interface IDrivingActions
+    {
+        void OnSteer(InputAction.CallbackContext context);
+        void OnGas(InputAction.CallbackContext context);
+        void OnBrake(InputAction.CallbackContext context);
     }
 }

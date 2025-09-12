@@ -195,6 +195,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23183d9c142fcf04eab5b3dcdd461c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAcceleration: 30
+  maxSpeed: 135
+  turnSensitivity: 0.5
+  maxSteerAngle: 25
+  airSteerForce: 10000
+  airAcceleration: 50
+  enableAirAcceleration: 1
+  _centerOfMass: {x: 0, y: -0.61, z: 0}
+  groundMagnetism: 1.5
+  wheels:
+  - wheelModel: {fileID: 816201307711788096}
+    wheelCollider: {fileID: 3773027107043133205}
+    axel: 0
+  - wheelModel: {fileID: 6749465583812970887}
+    wheelCollider: {fileID: 7377839600526753759}
+    axel: 0
+  - wheelModel: {fileID: 2688620007285908567}
+    wheelCollider: {fileID: 9129259733291614602}
+    axel: 1
+  - wheelModel: {fileID: 8034682267919415126}
+    wheelCollider: {fileID: 4890604061728160873}
+    axel: 1
+  currentSpeed: 0
+  currentSpeedMPH: 0
+  speedGauge: {fileID: 0}
+  isGrounded: 0
+  lastJumpTime: 0
 --- !u!1 &4453175297608361439
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +714,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec6a8fc6925acb4abc5500eeecb8270, type: 3}
+--- !u!1 &816201307711788096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8948458998355892771, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+    type: 3}
+  m_PrefabInstance: {fileID: 8610014765080137315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2688620007285908567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3300277157058532812, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+    type: 3}
+  m_PrefabInstance: {fileID: 8610014765080137315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6749465583812970887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6136715244604635164, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+    type: 3}
+  m_PrefabInstance: {fileID: 8610014765080137315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8034682267919415126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1800320807437547829, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+    type: 3}
+  m_PrefabInstance: {fileID: 8610014765080137315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8139785404275829128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
