@@ -57,9 +57,9 @@ WheelCollider:
     m_AsymptoteValue: 1.2
     m_Stiffness: 2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.25
-    m_ExtremumValue: 2.2
-    m_AsymptoteSlip: 0.6
+    m_ExtremumSlip: 0.6
+    m_ExtremumValue: 5
+    m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1.4
     m_Stiffness: 2.5
   m_IncludeLayers:
@@ -81,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8790279799842680918}
   m_Layer: 0
-  m_Name: Wheels
+  m_Name: WheelColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,9 +311,9 @@ WheelCollider:
     m_AsymptoteValue: 1.2
     m_Stiffness: 2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.25
-    m_ExtremumValue: 2.2
-    m_AsymptoteSlip: 0.6
+    m_ExtremumSlip: 0.6
+    m_ExtremumValue: 5
+    m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1.4
     m_Stiffness: 2.5
   m_IncludeLayers:
@@ -414,9 +414,9 @@ WheelCollider:
     m_AsymptoteValue: 1.2
     m_Stiffness: 2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.25
-    m_ExtremumValue: 2.2
-    m_AsymptoteSlip: 0.6
+    m_ExtremumSlip: 0.6
+    m_ExtremumValue: 5
+    m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1.4
     m_Stiffness: 2.5
   m_IncludeLayers:
@@ -538,9 +538,9 @@ WheelCollider:
     m_AsymptoteValue: 1.2
     m_Stiffness: 2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.25
-    m_ExtremumValue: 2.2
-    m_AsymptoteSlip: 0.6
+    m_ExtremumSlip: 0.6
+    m_ExtremumValue: 5
+    m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 1.4
     m_Stiffness: 2.5
   m_IncludeLayers:
