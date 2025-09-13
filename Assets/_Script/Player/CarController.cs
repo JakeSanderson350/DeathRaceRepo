@@ -25,7 +25,7 @@ public class CarController : MonoBehaviour
     [Header("Performance")]
     public float maxAcceleration = 30.0f;
     public float maxSpeed = 44.704f; // m/s
-    //public float brakeAcceleration = 35.0f;
+    public float brakeAcceleration = 35.0f;
 
     [Header("Steering")]
     public float turnSensitivity = 1.0f;
@@ -82,6 +82,7 @@ public class CarController : MonoBehaviour
     {
         Steer();
         ApplyGas();
+        ApplyBrake();
 
         float groundForce = currentSpeed * groundMagnetism * 100f;
         carRb.AddForce(Vector3.down * groundForce);
@@ -101,11 +102,11 @@ public class CarController : MonoBehaviour
             {
                 if (currentSpeed < maxSpeed)
                 {
-                    wheel.wheelCollider.motorTorque = gasInput * maxAcceleration * 100;
+                    wheel.wheelCollider.motorTorque = gasInput * maxAcceleration /** 100*/;
                 }
                 else
                 {
-                    wheel.wheelCollider.motorTorque = gasInput * maxAcceleration * 20;
+                    //wheel.wheelCollider.motorTorque = gasInput * maxAcceleration * 20;
                 }
             }
             else if (gasInput < 0)
@@ -115,10 +116,26 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                wheel.wheelCollider.motorTorque = 0;
+                //wheel.wheelCollider.motorTorque = 0;
             }
         }
     }
+
+    void ApplyBrake()
+    {
+        if (!isGrounded)
+            return;
+
+        // Only brake when holding spacebar (not just toggling drift)
+        if (brakeInput > 0) // Only brake while holding after initial press
+        {
+            foreach (var wheel in wheels)
+            {
+                wheel.wheelCollider.motorTorque = brakeInput * brakeAcceleration * -1;
+            }
+        }
+    }
+
 
     void Steer()
     {

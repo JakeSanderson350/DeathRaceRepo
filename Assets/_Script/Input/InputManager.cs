@@ -30,7 +30,9 @@ public class InputManager : MonoBehaviour
         drivingControls.Steer.performed += ctx => steerInput = ctx.ReadValue<float>();
         drivingControls.Steer.canceled += ctx => steerInput = ctx.ReadValue<float>();
         drivingControls.Gas.performed += ctx => gasInput = ctx.ReadValue<float>();
+        drivingControls.Gas.canceled += ctx => gasInput = ctx.ReadValue<float>();
         drivingControls.Brake.performed += ctx => brakeInput = ctx.ReadValue<float>();
+        drivingControls.Brake.canceled += ctx => brakeInput = ctx.ReadValue<float>();
     }
 
     private void OnEnable() //restarts controls when needed
