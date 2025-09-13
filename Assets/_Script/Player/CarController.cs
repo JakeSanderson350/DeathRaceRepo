@@ -52,7 +52,7 @@ public class CarController : MonoBehaviour
     public bool isGrounded;
     public float lastJumpTime;
 
-    float gasInput, brakeInput;
+    public float gasInput, brakeInput;
     float steerInput;
 
     private Rigidbody carRb;
@@ -116,7 +116,7 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                //wheel.wheelCollider.motorTorque = 0;
+                wheel.wheelCollider.motorTorque = 0;
             }
         }
     }

@@ -195,8 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23183d9c142fcf04eab5b3dcdd461c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 30
+  maxAcceleration: 2000
   maxSpeed: 135
+  brakeAcceleration: 1500
   turnSensitivity: 0.5
   maxSteerAngle: 25
   airSteerForce: 10000
@@ -222,6 +223,8 @@ MonoBehaviour:
   speedGauge: {fileID: 0}
   isGrounded: 0
   lastJumpTime: 0
+  gasInput: 0
+  brakeInput: 0
 --- !u!1 &4453175297608361439
 GameObject:
   m_ObjectHideFlags: 0
