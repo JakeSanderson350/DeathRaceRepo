@@ -16,17 +16,22 @@ public class MusicPlaylist : ScriptableObject
     public List<MusicTrack> playlist;
 
 
-    public MusicTrack CurrentTrack => index >= playlist.Count ? NextTrack() : playlist[index];
+    public MusicTrack CurrentTrack => playlist[index];
 
     public MusicTrack NextTrack()
     {
-        index = index >= playlist.Count ? 0 : index;
-        return playlist[index++]; //Huzzah! A use case!
+        index = index >= playlist.Count ? 0 : index + 1;
+        return playlist[index];
+    }
+    public MusicTrack PreviousTrack()
+    {
+        index = index <= 0 ? playlist.Count - 1 : index - 1;
+        return playlist[index];  
     }
 
     public MusicTrack SetTrack(int i)
     {
-        index = i >= playlist.Count ? 0 : i;
-        return playlist[index++];
+        index = Mathf.Clamp(i , 0, playlist.Count - 1);
+        return playlist[index];
     }
 }

@@ -44,6 +44,7 @@ public class MusicManager : MonoBehaviour
 
     [Button] void DebugNextTrack() => TrackNext();
     public void TrackNext(bool loop = false) => PlayMusic(playlist.NextTrack(), loop);
+    public void TrackPrevious(bool loop = false) => PlayMusic(playlist.PreviousTrack(), loop);
     public void TrackSet(int trackNum, bool loop = false) => PlayMusic(playlist.SetTrack(trackNum), loop);
 
     void PlayMusic(MusicTrack music, bool loop = false)

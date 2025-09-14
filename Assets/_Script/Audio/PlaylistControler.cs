@@ -28,4 +28,9 @@ public class PlaylistControler : MonoBehaviour
     {
         GameManager.inst.GetComponent<MusicManager>().TrackNext();
     }
+
+    public void PreviousTrack()
+    {
+        GameManager.inst.GetComponent<MusicManager>().TrackPrevious();
+    }
 }
