@@ -20,4 +20,4 @@ MonoBehaviour:
   reloadLevel: {fileID: 11400000}
   enableMouseOnLoad: 1
   playOnSceneLoad: 1
-  soundtrack: {fileID: 8300000, guid: f36abff6380984749854144b9b2b61a6, type: 3}
+  playlist: {fileID: 11400000, guid: 81885d9a322b269409f34f1ce2a4515d, type: 2}

@@ -1,16 +1,19 @@
+using EditorAttributes;
+using ImprovedTimers;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] AudioMixerGroup musicMixer;
     [SerializeField] AudioClip defaultMusicClip;
+
+    MusicPlaylist playlist;
+
     AudioSource activeTrack;
     AudioSource fadeTrack;
-    AudioSource introTrack;
-    const float FADE_DURATION = 0.5f;
+    CountdownTimer playlistTimer;
 
     private void OnEnable()
     {
@@ -23,31 +26,47 @@ public class MusicManager : MonoBehaviour
 
     void PlayOnAwake(LevelData levelData)
     {
-        if (introTrack != null)
-            KillTrack(introTrack);
-
         if (activeTrack != null)
-                StopMusic();
+            StopMusic();
 
-        if(levelData.playOnSceneLoad)
-            PlayMusic(levelData.soundtrack);
+        if(levelData.playOnSceneLoad && levelData.playlist != null)
+            PlayPlaylist(levelData.playlist);
     }
 
-    public void PlayMusic(AudioClip music)
+    public void PlayPlaylist(MusicPlaylist playlist)
     {
-        if(activeTrack != null)
-            return;
+        this.playlist = playlist;
+        PlayMusic(playlist.CurrentTrack, playlist.ignoreLoopedTracks ? false : playlist.CurrentTrack.loop);
+    }
 
-        if (introTrack != null) 
-            StartCoroutine(FadeTrack(introTrack, FADE_DURATION));
+    [Button] void DebugNextTrack() => TrackNext();
+    public void TrackNext(bool loop = false) => PlayMusic(playlist.NextTrack(), loop);
+    public void TrackSet(int trackNum, bool loop = false) => PlayMusic(playlist.SetTrack(trackNum), loop);
 
-        activeTrack = AudioPlayer.PlaySFXLoop(music, transform, 1);
+    void PlayMusic(MusicTrack music, bool loop = false)
+    {
+        if (activeTrack != null)
+            StopMusic();
+
+        activeTrack = AudioPlayer.PlaySFX(music.track, transform);
         activeTrack.spatialBlend = 0;
         activeTrack.outputAudioMixerGroup = musicMixer;
         activeTrack.Play();
+
+        if(loop) return;
+
+        playlistTimer = new(Mathf.Clamp(music.Duration - music.fadeTime, 0f, music.Duration));
+        playlistTimer.OnTimerStop += TrackTimerExpired;
+        playlistTimer.Start();
     }
 
-    public void StopMusic()
+    void TrackTimerExpired()
+    {
+        StopMusic(playlist.CurrentTrack.fadeTime);
+        PlayMusic(playlist.NextTrack());
+    }
+
+    public void StopMusic(float duration = 1f)
     {
         if(fadeTrack != null) 
             KillTrack(fadeTrack);
@@ -55,12 +74,13 @@ public class MusicManager : MonoBehaviour
         if (activeTrack == null)
             return;
 
+        playlistTimer?.Dispose();
         fadeTrack = activeTrack;
         activeTrack = null;
-        StartCoroutine(FadeTrack(fadeTrack));
+        StartCoroutine(FadeTrack(fadeTrack, duration));
     }
 
-    IEnumerator FadeTrack(AudioSource track, float duration = 1f)
+    IEnumerator FadeTrack(AudioSource track, float duration)
     {
         float tick = 0.02f;
         WaitForSecondsRealtime delay = new WaitForSecondsRealtime(tick);
@@ -84,4 +104,6 @@ public class MusicManager : MonoBehaviour
         track.Stop();
         Destroy(track.gameObject);
     }
+
+
 }
