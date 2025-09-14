@@ -20,7 +20,7 @@ public class MusicPlaylist : ScriptableObject
 
     public MusicTrack NextTrack()
     {
-        index = index >= playlist.Count ? 0 : index + 1;
+        index = index >= playlist.Count - 1 ? 0 : index + 1;
         return playlist[index];
     }
     public MusicTrack PreviousTrack()
