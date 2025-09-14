@@ -472,7 +472,7 @@ Transform:
   m_GameObject: {fileID: 278543668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000059604645}
-  m_LocalPosition: {x: -0.621, y: 0.664, z: -2.4299989}
+  m_LocalPosition: {x: -0.538, y: 0.89400023, z: -2.296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -513,7 +513,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.020618556, b: 0, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 0
@@ -751,6 +751,55 @@ RectTransform:
   m_AnchoredPosition: {x: -292.3, y: 0}
   m_SizeDelta: {x: 584.5, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!1 &375905524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375905526}
+  - component: {fileID: 375905525}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &375905525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375905524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!4 &375905526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375905524}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4277165, y: 1.3098083, z: -2.6489444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &445363211
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -883,7 +932,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9811321, g: 0.84594446, b: 0.28230685, a: 1}
-  m_Intensity: 5
+  m_Intensity: 7
   m_Range: 10
   m_SpotAngle: 69.01282
   m_InnerSpotAngle: 35.571312
@@ -1057,7 +1106,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.6179246, g: 1, b: 0.8158394, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.4
   m_Range: 10
   m_SpotAngle: 128.84616
   m_InnerSpotAngle: 0
@@ -1175,7 +1224,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.6179246, g: 1, b: 0.8158394, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 128.84616
   m_InnerSpotAngle: 0
@@ -1592,7 +1641,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.6179246, g: 1, b: 0.8158394, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.4
   m_Range: 10
   m_SpotAngle: 128.84616
   m_InnerSpotAngle: 0
@@ -5266,7 +5315,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.96763784, g: 0.5707547, b: 1, a: 1}
-  m_Intensity: 0.22
+  m_Intensity: 0.43
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5384,7 +5433,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.6179246, g: 1, b: 0.8158394, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 128.84616
   m_InnerSpotAngle: 0
@@ -5708,7 +5757,7 @@ Transform:
   m_GameObject: {fileID: 2008050009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000059604645}
-  m_LocalPosition: {x: 0.632, y: 0.664, z: -2.43}
+  m_LocalPosition: {x: 0.55, y: 0.894, z: -2.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5749,7 +5798,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.020618556, b: 0, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 0
@@ -5969,9 +6018,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 948288047}
+  - {fileID: 375905526}
   - {fileID: 189480020}
   - {fileID: 930779428}
+  - {fileID: 510313565}
   - {fileID: 1965092615}
   - {fileID: 1903418000}
   - {fileID: 748610840}
-  - {fileID: 510313565}
