@@ -1,5 +1,6 @@
 using EditorAttributes;
 using ImprovedTimers;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -14,6 +15,8 @@ public class MusicManager : MonoBehaviour
     AudioSource activeTrack;
     AudioSource fadeTrack;
     CountdownTimer playlistTimer;
+
+    public static event Action<MusicTrack> onTrackStarted;
 
     private void OnEnable()
     {
@@ -36,7 +39,7 @@ public class MusicManager : MonoBehaviour
     public void PlayPlaylist(MusicPlaylist playlist)
     {
         this.playlist = playlist;
-        PlayMusic(playlist.CurrentTrack, playlist.ignoreLoopedTracks ? false : playlist.CurrentTrack.loop);
+        PlayMusic(playlist.SetTrack(0), playlist.ignoreLoopedTracks ? false : playlist.CurrentTrack.loop);
     }
 
     [Button] void DebugNextTrack() => TrackNext();
@@ -48,12 +51,14 @@ public class MusicManager : MonoBehaviour
         if (activeTrack != null)
             StopMusic();
 
+        onTrackStarted?.Invoke(music);
+
         activeTrack = AudioPlayer.PlaySFX(music.track, transform);
         activeTrack.spatialBlend = 0;
         activeTrack.outputAudioMixerGroup = musicMixer;
         activeTrack.Play();
 
-        if(loop) return;
+        if(loop || music.loop) return;
 
         playlistTimer = new(Mathf.Clamp(music.Duration - music.fadeTime, 0f, music.Duration));
         playlistTimer.OnTimerStop += TrackTimerExpired;
@@ -63,7 +68,7 @@ public class MusicManager : MonoBehaviour
     void TrackTimerExpired()
     {
         StopMusic(playlist.CurrentTrack.fadeTime);
-        PlayMusic(playlist.NextTrack());
+        PlayMusic(playlist.NextTrack(), playlist.ignoreLoopedTracks ? false : playlist.CurrentTrack.loop);
     }
 
     public void StopMusic(float duration = 1f)
