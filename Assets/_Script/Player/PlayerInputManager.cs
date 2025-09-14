@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
     CarController carController;
 
@@ -27,13 +27,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         GetInput();
-
-    }
-
-    private void FixedUpdate()
-    {
         carController.SetInputs(steerInput, gasInput, brakeInput);
-        carController.UpdateCarController();
     }
 
     private void GetInput()
