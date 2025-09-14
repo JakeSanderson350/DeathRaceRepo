@@ -22,26 +22,11 @@ public class CarController : MonoBehaviour
         public Axel axel;
     }
 
-    [Header("Performance")]
-    public float maxAcceleration = 30.0f;
-    public float maxSpeed = 44.704f; // m/s
-    public float brakeAcceleration = 35.0f;
-
-    [Header("Steering")]
-    public float turnSensitivity = 1.0f;
-    public float maxSteerAngle = 30.0f;
-
-    [Header("Air Control")]
-    public float airSteerForce = 300f;
-    public float airAcceleration = 10f;
-    public bool enableAirAcceleration = true;
-
-    [Header("Physics")]
-    public Vector3 _centerOfMass;
-    public float groundMagnetism = 1.5f;
+    [SerializeField] private CarStats carProfile;
 
     [Header("Wheels")]
     public List<Wheel> wheels;
+    private float currentTorque;
 
     [Header("Speed Info (Read Only)")]
     public float currentSpeed; //in m/s
@@ -60,7 +45,7 @@ public class CarController : MonoBehaviour
     void Start()
     {
         carRb = GetComponent<Rigidbody>();
-        carRb.centerOfMass = _centerOfMass;
+        carRb.centerOfMass = carProfile._centerOfMass;
 
     }
 
@@ -80,11 +65,14 @@ public class CarController : MonoBehaviour
 
     public void UpdateCarController()
     {
+        currentTorque = 0.0f;
+
         Steer();
         ApplyGas();
         ApplyBrake();
+        ApplyMotorTorque();
 
-        float groundForce = currentSpeed * groundMagnetism * 100f;
+        float groundForce = currentSpeed * carProfile.groundMagnetism * 100f;
         carRb.AddForce(Vector3.down * groundForce);
     }
 
@@ -93,30 +81,15 @@ public class CarController : MonoBehaviour
         if (!isGrounded)
             return;
 
-        float currentMaxSpeed = maxSpeed;
-        float currentAcceleration = maxAcceleration;
-
-        foreach (var wheel in wheels)
+        if (gasInput > 0)
         {
-            if (gasInput > 0)
+            if (currentSpeed < carProfile.maxSpeed)
             {
-                if (currentSpeed < maxSpeed)
-                {
-                    wheel.wheelCollider.motorTorque = gasInput * maxAcceleration /** 100*/;
-                }
-                else
-                {
-                    //wheel.wheelCollider.motorTorque = gasInput * maxAcceleration * 20;
-                }
-            }
-            else if (gasInput < 0)
-            {
-                Debug.Log("Sure?");
-                wheel.wheelCollider.motorTorque = gasInput * maxAcceleration/* * 100*/;
+                currentTorque += gasInput * carProfile.maxAcceleration /** 100*/;
             }
             else
             {
-                wheel.wheelCollider.motorTorque = 0;
+                currentTorque += gasInput * carProfile.maxAcceleration * 20;
             }
         }
     }
@@ -129,10 +102,7 @@ public class CarController : MonoBehaviour
         // Only brake when holding spacebar (not just toggling drift)
         if (brakeInput > 0) // Only brake while holding after initial press
         {
-            foreach (var wheel in wheels)
-            {
-                wheel.wheelCollider.motorTorque = brakeInput * brakeAcceleration * -1;
-            }
+            currentTorque += brakeInput * carProfile.brakeAcceleration * -1;
         }
     }
 
@@ -143,12 +113,23 @@ public class CarController : MonoBehaviour
         {
             if (wheel.axel == Axel.Front)
             {
-                var _steerAngle = steerInput * turnSensitivity * maxSteerAngle;
+                var _steerAngle = steerInput * carProfile.turnSensitivity * carProfile.maxSteerAngle;
 
                 float lerpSpeed = 0.6f;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed);
+                wheel.wheelModel.transform.eulerAngles = new Vector3(0.0f, Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), 0.0f);
             }
         }
+    }
+
+    private void ApplyMotorTorque()
+    {
+        foreach (var wheel in wheels)
+        {
+            wheel.wheelCollider.motorTorque = currentTorque;
+        }
+
+        currentTorque = 0.0f;
     }
 
     void CheckGrounded()

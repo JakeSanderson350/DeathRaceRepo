@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 5403260301921095647}
   - component: {fileID: 6992635699513178905}
   - component: {fileID: 5491851347639063556}
+  - component: {fileID: 8954257295709429171}
   - component: {fileID: 2544517819230756238}
   m_Layer: 0
   m_Name: Player
@@ -183,6 +184,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fadb93237dbb5884d9b9ced593dad2b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8954257295709429171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009770588808045645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ef97451a8297c448426ce79073a170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2544517819230756238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,16 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23183d9c142fcf04eab5b3dcdd461c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAcceleration: 2500
-  maxSpeed: 135
-  brakeAcceleration: 1500
-  turnSensitivity: 0.5
-  maxSteerAngle: 25
-  airSteerForce: 10000
-  airAcceleration: 50
-  enableAirAcceleration: 1
-  _centerOfMass: {x: 0, y: -0.61, z: 0}
-  groundMagnetism: 1.5
+  carProfile: {fileID: 11400000, guid: 418dcbd34bf787740880863bea135f86, type: 2}
   wheels:
   - wheelModel: {fileID: 816201307711788096}
     wheelCollider: {fileID: 3773027107043133205}

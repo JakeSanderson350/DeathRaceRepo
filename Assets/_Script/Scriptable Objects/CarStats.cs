@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using static CarController;
+
+[CreateAssetMenu(fileName = "New CarStats", menuName = "Player/CarStats")]
+public class CarStats : ScriptableObject
+{
+    [Header("Performance")]
+    public float maxAcceleration = 2500.0f;
+    public float brakeAcceleration = 1500.0f;
+    public float maxSpeed = 135.0f; // m/s
+
+    [Header("Steering")]
+    public float turnSensitivity = 1.0f;
+    public float maxSteerAngle = 30.0f;
+
+    [Header("Air Control")]
+    public float airSteerForce = 300f;
+    public float airAcceleration = 10f;
+    public bool enableAirAcceleration = true;
+
+    [Header("Physics")]
+    public Vector3 _centerOfMass;
+    public float groundMagnetism = 1.0f;
+}
