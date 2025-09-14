@@ -28,11 +28,11 @@ public class Player : MonoBehaviour
     {
         GetInput();
 
-        carController.SetInputs(steerInput, gasInput, brakeInput);
     }
 
     private void FixedUpdate()
     {
+        carController.SetInputs(steerInput, gasInput, brakeInput);
         carController.UpdateCarController();
     }
 
