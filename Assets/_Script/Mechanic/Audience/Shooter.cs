@@ -12,7 +12,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] float velocity;
 
     [Header("Targeting")]
-    [SerializeField] Vector3 spawnPoint = Vector3.up;
+    [SerializeField] Transform spawnPoint;
     [SerializeField, Range(0, 1)] float minimumPopularity = 0.5f;
 
     FrequencyTimer shootTimer;
@@ -22,12 +22,13 @@ public class Shooter : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + spawnPoint, Vector3.one * 0.5f);
+        Gizmos.DrawWireCube(spawnPoint.position, Vector3.one * 0.5f);
     }
 
     private void Awake()
     {
-        tracker = gameObject.AddComponent<OverlapTracker>();
+        tracker = TryGetComponent(out OverlapTracker trk) ? trk : gameObject.AddComponent<OverlapTracker>();
+        tracker.radius = range;
         shootTimer = new(fireRate);
         shootTimer.OnTick += Shoot;
     }
@@ -46,9 +47,11 @@ public class Shooter : MonoBehaviour
     {
         if(tracker.Tracks.Count == 0) 
             return;
-
-        List<Transform> validTargets = tracker.Tracks.FindAll(x => x.TryGetComponent(out Popularity pop) && pop.Value > minimumPopularity);
+        List<Transform> validTargets = tracker.Tracks.FindAll(x => x.TryGetComponent(out Popularity pop) && pop.Value < minimumPopularity);
         Transform target = null;
+
+        if(validTargets.Count <= 0)
+            return;
 
         foreach(Transform t in validTargets)
         {
@@ -62,8 +65,11 @@ public class Shooter : MonoBehaviour
                 target = t;
         }
 
-        Vector3 aimPosition = Targeter.FindIntercept(target.GetComponent<Rigidbody>(), transform, velocity);
-        Projectile shot = Instantiate(projectilePrefab, transform.position + spawnPoint, Quaternion.Euler(transform.position + spawnPoint - aimPosition)).GetComponent<Projectile>();
+        Vector3 aimPosition = Targeter.FindIntercept(target.GetComponent<Rigidbody>(), spawnPoint, velocity);
+        Debug.DrawLine(spawnPoint.position, aimPosition, Color.yellow, 1 /fireRate);
+
+        Projectile shot = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        shot.transform.up = aimPosition - spawnPoint.position;
         activeProjectiles.Add(shot);
 
         shot.GetComponent<Rigidbody>().velocity = shot.transform.up * velocity;

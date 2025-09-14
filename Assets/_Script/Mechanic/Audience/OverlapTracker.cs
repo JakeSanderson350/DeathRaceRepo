@@ -8,7 +8,7 @@ public class OverlapTracker : MonoBehaviour
 
     public float radius = 5f;
 
-    List<Transform> tracks = new();
+    [SerializeField] List<Transform> tracks = new();
     SphereCollider col;
 
     private void OnDrawGizmosSelected()
@@ -17,7 +17,7 @@ public class OverlapTracker : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
-    private void Awake()
+    private void Start()
     {
         col = gameObject.AddComponent<SphereCollider>();
         col.radius = radius;

@@ -28,7 +28,6 @@ public class Resource : MonoBehaviour, IResource
         min = stats.min;
     }
 
-
     protected virtual void SetValue(float num)
     {
         if(num == value) 

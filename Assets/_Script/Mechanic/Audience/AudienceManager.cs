@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class AudienceManager : MonoBehaviour
 {
-    List<Popularity> racers = new();
+    public static AudienceManager inst;
 
+    public List<Popularity> racers = new();
 
+    private void Awake()
+    {
+        inst = this;
+    }
 }

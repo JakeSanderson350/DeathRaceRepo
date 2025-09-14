@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scene/MainMenu.unity
+    path: Assets/_Scene/Workshop/Projectile Workshop.unity
     guid: 419f7ff44065749429e0c9e4028be46d
   m_configObjects: {}
