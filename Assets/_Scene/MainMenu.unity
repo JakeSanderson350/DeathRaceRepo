@@ -3675,6 +3675,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2489760126543313958, guid: 6dca31887f353ae44a3d0194e1fc374b,
+        type: 3}
+      propertyPath: defaultMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4895f1fe1ffba0147aeb0f129a2f0bc8, type: 3}
     - target: {fileID: 4701211672961156582, guid: 6dca31887f353ae44a3d0194e1fc374b,
         type: 3}
       propertyPath: m_LocalPosition.x

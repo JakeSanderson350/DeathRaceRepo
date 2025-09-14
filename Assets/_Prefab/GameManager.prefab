@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicMixer: {fileID: 4692374585758867008, guid: 178e1d43e24f2c54b9d8c5d73d419438,
     type: 2}
-  defaultMusicClip: {fileID: 8300000, guid: 4895f1fe1ffba0147aeb0f129a2f0bc8, type: 3}
+  defaultMusicClip: {fileID: 8300000, guid: 117f1bf7b1dff2543ab37b973c289686, type: 3}
 --- !u!114 &1805827261187802387
 MonoBehaviour:
   m_ObjectHideFlags: 0
