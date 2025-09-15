@@ -11,6 +11,18 @@ public class ZoneProfile : ScriptableObject
     [Range(0f, 1f)]
     public float accelerate;
 
+    private void OnValidate()
+    {
+        if (accelerate > brake)
+        {
+            brake = 1f - accelerate;
+        }
+        else
+        {
+            accelerate = 1f - brake;
+        }
+    }
+
     [Tooltip("Likelihood of enemies to brake when within this zone.")]
     [Range(0f, 1f)]
     public float brake;
@@ -18,9 +30,5 @@ public class ZoneProfile : ScriptableObject
     [Tooltip("Likelihood of enemies to drift when within this zone.")]
     [Range(0f, 1f)]
     public float drift;
-
-    [Tooltip("Likelihood of enemies to attempt a trick in this zone.")]
-    [Range(0f, 1f)]
-    public float trick;
 
 }

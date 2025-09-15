@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    EnemyState currentState;
+    [SerializeField] EnemyState currentState;
+    [SerializeField] EnemyData enemyData;
+    CarController carController;
+
+    float velocityGoal;
+    Vector3 goalPosition;
+    bool isDrifting;
+
+    float currentSteer;
+    float currentGas;
+    float currentBrake;
+    Waypoint[] waypoints;
+    float variance;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        waypoints = FindObjectsOfType<Waypoint>();
+        variance = 1f / enemyData.skill;
     }
 
     // Update is called once per frame
@@ -18,7 +33,14 @@ public class EnemyBehavior : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.LAPPING:
-
+                float dist = float.MaxValue;
+                foreach (Waypoint wp in waypoints)
+                {
+                    if (Vector3.Distance(transform.position, wp.transform.position) <= dist)
+                    {
+                        goalPosition = wp.transform.position;
+                    }
+                }
                 break;
             case EnemyState.DESTROYING:
 
@@ -26,6 +48,22 @@ public class EnemyBehavior : MonoBehaviour
             case EnemyState.STYLING:
 
                 break;
+        }
+    }
+
+    void CalculateGoals(float accel, float brake, float drift)
+    {
+        float driftChance = enemyData.style * drift;
+
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("TrackZone"))
+        {
+            ZoneProfile zoneData = other.GetComponent<TrackZone>().profile;
+            CalculateGoals(zoneData.accelerate, zoneData.brake, zoneData.drift);
         }
     }
 

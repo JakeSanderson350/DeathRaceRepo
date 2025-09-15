@@ -10,16 +10,19 @@ public class EnemyData : ScriptableObject
         "as a method of increasing audience favor.")]
     [Range(0f, 1f)]
     public float aggression;
+
     [Tooltip("Affects the likelihood of an enemy to attempt tricks as a method of increasing" +
         "audience favor.")]
     [Range(0f, 1f)]
     public float style;
 
+    [Tooltip("Affects the tendency of an enemy to drive along an ideal path and make better" +
+        "driving decisions.")]
+    [Range(0f, 1f)]
+    public float skill;
 
-    [Header("Stats")]
-    // if we have a different method of handling car stats
-    // I will change this to link to another SO with the type of car they have
-    public float acceleration;
 
+    // add car profile
+    
 
 }
