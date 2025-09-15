@@ -39,20 +39,12 @@ public class Popularity : Resource
         countdownFuse = countdown;
         timer = new TickTimer(countdownFuse / ((float)countdown * countdownCheat));
         timer.OnTick += CountDownTick;
+        AudienceManager.inst.racers.Add(this);
     }
 
     private void OnDestroy()
     {
         timer?.Dispose();
-    }
-
-    private void OnEnable()
-    {
-        AudienceManager.inst.racers.Add(this);
-    }
-
-    private void OnDisable()
-    {
         AudienceManager.inst.racers.Remove(this);
     }
 
@@ -66,7 +58,7 @@ public class Popularity : Resource
     {
         if(timer.IsRunning) return;
         
-        Debug.Log("Start death Clock");
+        //Debug.Log("Start death Clock");
 
         countdownFuse = countdown;
         timer.Start();
@@ -76,14 +68,14 @@ public class Popularity : Resource
     {
         if (!timer.IsRunning) return;
 
-        Debug.Log("Stop death Clock");
+        //Debug.Log("Stop death Clock");
         timer.Stop();
     }
 
     void CountDownTick()
     {
         int count = Mathf.RoundToInt(countdownFuse);
-        Debug.Log("Death Clock: " + count);
+        //Debug.Log("Death Clock: " + count);
 
         onCountdownTick?.Invoke(count);
 

@@ -39,7 +39,7 @@ public class CarController : MonoBehaviour
     public bool isGrounded;
     public float lastJumpTime;
 
-    float gasInput, brakeInput, steerInput;
+    float gasInput, brakeInput, steerInput, steerAngle;
     private bool jumpPressedRecently = false;
 
     private RaycastHit hit;
@@ -129,11 +129,11 @@ public class CarController : MonoBehaviour
         {
             if (wheel.axel == Axel.Front)
             {
-                var _steerAngle = steerInput * carProfile.turnSensitivity * carProfile.maxSteerAngle;
+                var _steerAngle = steerInput * carProfile.maxSteerAngle;
+                steerAngle = Mathf.Lerp(steerAngle, _steerAngle, carProfile.turnSensitivity * Time.fixedDeltaTime);
 
-                float lerpSpeed = 0.6f;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed);
-                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, Mathf.Clamp(Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), -carProfile.maxSteerAngle, carProfile.maxSteerAngle), 0.0f);
+                wheel.wheelCollider.steerAngle = steerAngle;
+                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, Mathf.Clamp(Mathf.Lerp(_steerAngle, wheel.wheelCollider.steerAngle, 1 * Time.fixedDeltaTime), -carProfile.maxSteerAngle, carProfile.maxSteerAngle), 0.0f);
             }
         }
     }

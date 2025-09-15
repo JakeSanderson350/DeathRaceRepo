@@ -51,7 +51,7 @@ public class Shooter : MonoBehaviour
         if(tracker.Tracks.Count == 0) 
             return;
 
-        List<Transform> validTargets = tracker.Tracks.FindAll(x => x.TryGetComponent(out Popularity pop) && pop.Value < minimumPopularity);
+        List<Transform> validTargets = tracker.Tracks.FindAll(x => x.parent.TryGetComponent(out Popularity pop) && pop.Value <= minimumPopularity);
         Transform target = null;
 
         if(validTargets.Count <= 0)

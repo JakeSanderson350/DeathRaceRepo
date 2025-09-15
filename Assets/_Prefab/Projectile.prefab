@@ -12013,7 +12013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0.5
-  force: 5000
+  force: 500000
   radius: 3
   mask:
     serializedVersion: 2
