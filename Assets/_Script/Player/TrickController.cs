@@ -50,7 +50,6 @@ public class TrickController : MonoBehaviour
         currentState = TrickState.Normal;
 
         inputQueue = new Queue<Inputs>();
-        Debug.Log("start");
     }
 
     // Update is called once per frame
@@ -150,7 +149,6 @@ public class TrickController : MonoBehaviour
     private IEnumerator DoTrick(string trickName)
     {
         currentState = TrickState.InTrick;
-        Debug.Log(trickName);
 
         // Pop car up
         carRB.AddForce(transform.up * carProfile.jumpForce, ForceMode.Impulse);

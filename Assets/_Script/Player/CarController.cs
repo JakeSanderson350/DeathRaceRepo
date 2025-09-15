@@ -42,6 +42,8 @@ public class CarController : MonoBehaviour
     float gasInput, brakeInput, steerInput;
     private bool jumpPressedRecently = false;
 
+    private RaycastHit hit;
+    private Vector3 roadNormal;
     private Rigidbody carRb;
 
     void Start()
@@ -88,9 +90,7 @@ public class CarController : MonoBehaviour
         ApplyGas();
         ApplyBrake();
         ApplyMotorTorque();
-
-        float groundForce = currentSpeed * carProfile.groundMagnetism * 100f;
-        carRb.AddForce(Vector3.down * groundForce);
+        ApplyDownforce();
     }
 
     void ApplyGas()
@@ -146,6 +146,24 @@ public class CarController : MonoBehaviour
         }
 
         currentTorque = 0.0f;
+    }
+
+    private void ApplyDownforce()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out hit, carProfile.magnetismDistance))
+        {
+            // Apply magnetism
+            roadNormal = hit.normal;
+
+            float magForce = currentSpeed * carProfile.groundMagnetism * 100;
+            carRb.AddForce(-roadNormal * magForce);
+        }
+
+        else
+        {
+            // Apply normal gravity
+            carRb.AddForce(Vector3.down * carProfile.gravity, ForceMode.Acceleration);
+        }
     }
 
     void CheckGrounded()
