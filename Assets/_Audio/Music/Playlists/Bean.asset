@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d75b427930c2a4c8d4b5fdedafc59b, type: 3}
+  m_Name: Bean
+  m_EditorClassIdentifier: 
+  crossfade: 0
+  ignoreLoopedTracks: 0
+  playlist:
+  - {fileID: 11400000, guid: 8be42ba7a86f1ac49bd7262b1fdb70cc, type: 2}
+  - {fileID: 11400000, guid: 7aa23d45e36cbed43b900809d7d79273, type: 2}
+  - {fileID: 11400000, guid: 9654a285c0835bb41a8602f58ae5e171, type: 2}
+  - {fileID: 11400000, guid: 46b5289fb8c75bf4b874e7ff24770260, type: 2}
+  - {fileID: 11400000, guid: 204a19b0a65cd3d4eb58e2c22f249262, type: 2}
+  - {fileID: 11400000, guid: 08efe431363a5544e8fe2b1a6174ec2a, type: 2}
+  - {fileID: 11400000, guid: a0d9f7fcbb7d5a84cace58a530aec5cc, type: 2}
+  - {fileID: 11400000, guid: 13a4ce217c12ba34db9098468560717d, type: 2}
+  - {fileID: 11400000, guid: fec3bf9978cda99488237ea1821c3eb3, type: 2}

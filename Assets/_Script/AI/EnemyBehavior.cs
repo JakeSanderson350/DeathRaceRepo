@@ -60,6 +60,7 @@ public class EnemyBehavior : MonoBehaviour
 
                 }
                 carController.SetInputs(DetermineSteering(goalPosition), DetermineAcceleration(goalPosition), 0f);
+                Debug.DrawLine(transform.position, goalPosition, Color.yellow);
                 break;
             case EnemyState.DESTROYING:
 
@@ -86,11 +87,16 @@ public class EnemyBehavior : MonoBehaviour
     {
         float steer = 0f;
 
-        float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
-        float t = Mathf.InverseLerp(0, 180f, angleBetween);
-        steer = Mathf.Lerp(-1f, 1f, t);
+        
+        //float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
+        float signedAngleBetween = Vector3.SignedAngle(transform.forward, goalPos - transform.position, Vector3.up);
+        //float angleBetween = Vector3.Dot(transform.forward, goalPos - transform.position);
+        //Debug.DrawLine(transform.position + transform.up * 2,  transform.position + transform.up * 2 + Quaternion uhauhuha fuck math);
 
-        return steer * 0.1f;
+        steer = Mathf.Lerp(-1f, 1f, Mathf.InverseLerp(-180f, 180f, signedAngleBetween));
+        //Debug.Log(steer);
+
+        return steer ;
         
     }
 
@@ -124,7 +130,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         waypoints.Remove(waypoint);
         reachedWaypoints.Add(waypoint);
-        Debug.Log(waypoint.name);
+        //Debug.Log(waypoint.name);
 
     }
 

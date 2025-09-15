@@ -17,7 +17,7 @@ public class LevelData : ScriptableObject
     [Header("Misc")]
     public bool enableMouseOnLoad;
     public bool playOnSceneLoad;
-    public AudioClip soundtrack;
+    public MusicPlaylist playlist;
 
     public void LoadNextLevel() => SceneManager.LoadScene(nextLevel.sceneName);
     public void LoadLastLevel() => SceneManager.LoadScene(lastLevel.sceneName);
