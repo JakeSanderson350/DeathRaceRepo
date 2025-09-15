@@ -352,6 +352,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa4207fc-13f3-4415-a01f-623832647976"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -486,6 +495,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Handbrake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b6f1e32-8604-4a96-bc71-98bbd050eb4b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b3a4264-5916-4bf3-aef5-b5c1e67327ce"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -508,6 +539,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Driving_Gas = m_Driving.FindAction("Gas", throwIfNotFound: true);
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
         m_Driving_Handbrake = m_Driving.FindAction("Handbrake", throwIfNotFound: true);
+        m_Driving_Jump = m_Driving.FindAction("Jump", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -704,6 +736,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Gas;
     private readonly InputAction m_Driving_Brake;
     private readonly InputAction m_Driving_Handbrake;
+    private readonly InputAction m_Driving_Jump;
     public struct DrivingActions
     {
         private @PlayerInput m_Wrapper;
@@ -712,6 +745,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Gas => m_Wrapper.m_Driving_Gas;
         public InputAction @Brake => m_Wrapper.m_Driving_Brake;
         public InputAction @Handbrake => m_Wrapper.m_Driving_Handbrake;
+        public InputAction @Jump => m_Wrapper.m_Driving_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Driving; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -733,6 +767,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Handbrake.started += instance.OnHandbrake;
             @Handbrake.performed += instance.OnHandbrake;
             @Handbrake.canceled += instance.OnHandbrake;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IDrivingActions instance)
@@ -749,6 +786,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Handbrake.started -= instance.OnHandbrake;
             @Handbrake.performed -= instance.OnHandbrake;
             @Handbrake.canceled -= instance.OnHandbrake;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IDrivingActions instance)
@@ -784,5 +824,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnGas(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
         void OnHandbrake(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

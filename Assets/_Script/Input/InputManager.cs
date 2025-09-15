@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     public static Vector2 inputDeltaPointer;
     public static float steerInput, gasInput, brakeInput;
     public static Action inputMenu;
-    public static Action inputStart, inputDriftDown, inputDriftUp;
+    public static Action inputStart, inputDriftDown, inputDriftUp, inputJump;
 
 
     private void Awake()
@@ -34,8 +34,9 @@ public class InputManager : MonoBehaviour
         drivingControls.Gas.canceled += ctx => gasInput = ctx.ReadValue<float>();
         drivingControls.Brake.performed += ctx => brakeInput = ctx.ReadValue<float>();
         drivingControls.Brake.canceled += ctx => brakeInput = ctx.ReadValue<float>();
-        drivingControls.Handbrake.started += ctx => inputDriftDown?.Invoke();
-        drivingControls.Handbrake.canceled += ctx => inputDriftUp?.Invoke();
+        drivingControls.Handbrake.started += ctx => inputDriftDown.Invoke();
+        drivingControls.Handbrake.canceled += ctx => inputDriftUp.Invoke();
+        drivingControls.Jump.started += ctx => inputJump.Invoke();
     }
 
     private void OnEnable() //restarts controls when needed

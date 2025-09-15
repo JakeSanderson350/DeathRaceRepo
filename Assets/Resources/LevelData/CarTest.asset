@@ -20,4 +20,4 @@ MonoBehaviour:
   reloadLevel: {fileID: 0}
   enableMouseOnLoad: 0
   playOnSceneLoad: 0
-  playlist: {fileID: 0}
+  playlist: {fileID: 11400000, guid: 846386d3039526b43b5b590d3c89fd42, type: 2}
