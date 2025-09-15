@@ -86,14 +86,15 @@ public class EnemyBehavior : MonoBehaviour
     {
         float steer = 0f;
 
-        float angleBetween = Vector3.SignedAngle(transform.forward, goalPos, Vector3.up);
+        float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
+        //float signedAngleBetween = Vector3.SignedAngle(transform.forward, goalPos - transform.position, Vector3.up);
         Debug.Log(angleBetween);
 
-        float t = Mathf.InverseLerp(-180f, 180f, angleBetween);
+        float t = Mathf.InverseLerp(0, 180f, angleBetween);
         steer = Mathf.Lerp(-1f, 1f, t);
         Debug.Log(steer);
 
-        return -steer * 0.2f;
+        return steer * 0.1f;
         
     }
 
