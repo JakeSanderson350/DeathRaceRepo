@@ -1,27 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
+
+public enum Axel
+{
+    Front,
+    Rear
+}
+
+[Serializable]
+public struct Wheel
+{
+    public GameObject wheelModel;
+    public WheelCollider wheelCollider;
+    //public GameObject wheelEffectObj;
+    //public ParticleSystem smokeParticle;
+    public Axel axel;
+}
+
 public class CarController : MonoBehaviour
 {
-    public enum Axel
-    {
-        Front,
-        Rear
-    }
-
-    [Serializable]
-    public struct Wheel
-    {
-        public GameObject wheelModel;
-        public WheelCollider wheelCollider;
-        //public GameObject wheelEffectObj;
-        //public ParticleSystem smokeParticle;
-        public Axel axel;
-    }
-
     [SerializeField] private CarStats carProfile;
 
     [Header("Wheels")]
@@ -37,9 +39,11 @@ public class CarController : MonoBehaviour
     public bool isGrounded;
     public float lastJumpTime;
 
-    public float gasInput, brakeInput;
-    float steerInput;
+    float gasInput, brakeInput, steerInput;
+    private bool jumpPressedRecently = false;
 
+    private RaycastHit hit;
+    private Vector3 roadNormal;
     private Rigidbody carRb;
 
     void Start()
@@ -51,9 +55,24 @@ public class CarController : MonoBehaviour
 
     public void SetInputs(float _steer, float _gas, float _brake)
     {
-        steerInput = _steer;
+        
+        steerInput = jumpPressedRecently ? 0.0f : _steer; //No steer input when doing trick input
         gasInput = _gas;
         brakeInput = _brake;
+    }
+
+    public void JumpDown()
+    {
+        if (isGrounded)
+        {
+            jumpPressedRecently = true;
+            Invoke("ResetJump", carProfile.inputBufferLength);
+        }
+    }
+
+    private void ResetJump()
+    {
+        jumpPressedRecently = false;
     }
 
     // Update is called once per frame
@@ -71,9 +90,7 @@ public class CarController : MonoBehaviour
         ApplyGas();
         ApplyBrake();
         ApplyMotorTorque();
-
-        float groundForce = currentSpeed * carProfile.groundMagnetism * 100f;
-        carRb.AddForce(Vector3.down * groundForce);
+        ApplyDownforce();
     }
 
     void ApplyGas()
@@ -99,8 +116,7 @@ public class CarController : MonoBehaviour
         if (!isGrounded)
             return;
 
-        // Only brake when holding spacebar (not just toggling drift)
-        if (brakeInput > 0) // Only brake while holding after initial press
+        if (brakeInput > 0)
         {
             currentTorque += brakeInput * carProfile.brakeAcceleration * -1;
         }
@@ -117,7 +133,7 @@ public class CarController : MonoBehaviour
 
                 float lerpSpeed = 0.6f;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed);
-                wheel.wheelModel.transform.eulerAngles = new Vector3(0.0f, Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), 0.0f);
+                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, Mathf.Clamp(Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), -carProfile.maxSteerAngle, carProfile.maxSteerAngle), 0.0f);
             }
         }
     }
@@ -130,6 +146,24 @@ public class CarController : MonoBehaviour
         }
 
         currentTorque = 0.0f;
+    }
+
+    private void ApplyDownforce()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out hit, carProfile.magnetismDistance))
+        {
+            // Apply magnetism
+            roadNormal = hit.normal;
+
+            float magForce = currentSpeed * carProfile.groundMagnetism * 100;
+            carRb.AddForce(-roadNormal * magForce);
+        }
+
+        else
+        {
+            // Apply normal gravity
+            carRb.AddForce(Vector3.down * carProfile.gravity, ForceMode.Acceleration);
+        }
     }
 
     void CheckGrounded()

@@ -119,6 +119,8 @@ GameObject:
   - component: {fileID: 5491851347639063556}
   - component: {fileID: 8954257295709429171}
   - component: {fileID: 2544517819230756238}
+  - component: {fileID: 4433676923568993755}
+  - component: {fileID: 6403564976200036024}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -227,8 +229,34 @@ MonoBehaviour:
   speedGauge: {fileID: 0}
   isGrounded: 0
   lastJumpTime: 0
-  gasInput: 0
-  brakeInput: 0
+--- !u!114 &4433676923568993755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009770588808045645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2dbf55f81df3c14887a9a2e88a366a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDrifting: 0
+--- !u!114 &6403564976200036024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009770588808045645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b222c76ed66714c4f9a62b3d44737c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carProfile: {fileID: 11400000, guid: 418dcbd34bf787740880863bea135f86, type: 2}
+  carAnimator: {fileID: 7780957064885755089}
+  carHitbox: {fileID: 0}
 --- !u!1 &4453175297608361439
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691292405188476492}
+  - component: {fileID: 1735478343038303177}
   m_Layer: 0
   m_Name: Camera Anchor
   m_TagString: Untagged
@@ -261,6 +290,23 @@ Transform:
   - {fileID: 7758868216135895021}
   m_Father: {fileID: 5403260301921095647}
   m_LocalEulerAnglesHint: {x: 4, y: 0, z: 0}
+--- !u!114 &1735478343038303177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4453175297608361439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958ea8d20a9ba944ea8d5a63d8dc0f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSmoothness: 25
+  rotSmoothness: 10
+  moveOffset: {x: 0, y: 3, z: -8}
+  rotOffset: {x: 0, y: 2, z: 0}
+  carTarget: {fileID: 5403260301921095647}
 --- !u!1 &7331509312815024869
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4506024654124313079}
+  - component: {fileID: 7780957064885755089}
   m_Layer: 0
   m_Name: CarVisual
   m_TagString: Untagged
@@ -364,6 +411,27 @@ Transform:
   - {fileID: 8139785404275829128}
   m_Father: {fileID: 5403260301921095647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &7780957064885755089
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649420559239651634}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f965446e5a1fb8e409cd613cc163face, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7856177472088162170
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +769,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7308745246921621676, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
     - target: {fileID: -6652725513331149018, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -711,11 +784,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
+    - target: {fileID: -4264924772272597650, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
+    - target: {fileID: -3378901634197446680, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
     - target: {fileID: 919132149155446097, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
         type: 3}
       propertyPath: m_Name
       value: ARCADE - FREE Racing Car
       objectReference: {fileID: 0}
+    - target: {fileID: 3974313851768207858, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
+    - target: {fileID: 6837151064724302678, guid: 9ec6a8fc6925acb4abc5500eeecb8270,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 07f44fe3e9c462146a7769b976c50ec4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
