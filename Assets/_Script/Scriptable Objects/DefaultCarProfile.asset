@@ -21,4 +21,11 @@ MonoBehaviour:
   airAcceleration: 50
   enableAirAcceleration: 1
   _centerOfMass: {x: 0, y: -0.6, z: 0}
+  gravity: 9.8
   groundMagnetism: 5
+  magnetismDistance: 20
+  roadLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpForce: 20000
+  inputBufferLength: 0.2
