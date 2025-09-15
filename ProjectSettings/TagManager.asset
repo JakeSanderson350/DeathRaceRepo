@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - TrackZone
+  - Waypoint
   layers:
   - Default
   - TransparentFX

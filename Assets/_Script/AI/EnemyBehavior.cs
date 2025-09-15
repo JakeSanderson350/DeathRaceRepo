@@ -16,14 +16,19 @@ public class EnemyBehavior : MonoBehaviour
     float currentSteer;
     float currentGas;
     float currentBrake;
-    Waypoint[] waypoints;
+    GameObject[] waypointArr;
+    List<GameObject> waypoints;
+    List<GameObject> reachedWaypoints;
+    GameObject finalWaypoint;
     float variance;
+    
     
 
     // Start is called before the first frame update
     void Start()
     {
-        waypoints = FindObjectsOfType<Waypoint>();
+        waypointArr = GameObject.FindGameObjectsWithTag("Waypoint");
+        waypoints.AddRange(waypointArr);
         variance = 1f / enemyData.skill;
     }
 
@@ -34,13 +39,20 @@ public class EnemyBehavior : MonoBehaviour
         {
             case EnemyState.LAPPING:
                 float dist = float.MaxValue;
-                foreach (Waypoint wp in waypoints)
+                GameObject chosenWP = null;
+                foreach (GameObject wp in waypoints)
                 {
+                    if (wp == finalWaypoint && waypoints.Count > 1)
+                    {
+                        continue;
+                    }
                     if (Vector3.Distance(transform.position, wp.transform.position) <= dist)
                     {
                         goalPosition = wp.transform.position;
+                        chosenWP = wp;
                     }
                 }
+                
                 break;
             case EnemyState.DESTROYING:
 
@@ -64,7 +76,27 @@ public class EnemyBehavior : MonoBehaviour
         {
             ZoneProfile zoneData = other.GetComponent<TrackZone>().profile;
             CalculateGoals(zoneData.accelerate, zoneData.brake, zoneData.drift);
+            
         }
+        if (other.CompareTag("Waypoint"))
+        {
+            
+        }
+    }
+
+    public void ReachWaypoint(GameObject waypoint)
+    {
+        waypoints.Remove(waypoint);
+        reachedWaypoints.Add(waypoint);
+    }
+
+    public void ResetWaypoints(GameObject finalWP)
+    {
+        foreach(GameObject wp in reachedWaypoints)
+        {
+            waypoints.Add(wp);
+        }
+        finalWaypoint = finalWP;
     }
 
     // Lapping is normal driving around the track, destroying is aiming to destroy other cars, styling is going for tricks
