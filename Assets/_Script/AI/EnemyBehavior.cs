@@ -16,25 +16,30 @@ public class EnemyBehavior : MonoBehaviour
     float currentSteer;
     float currentGas;
     float currentBrake;
-    GameObject[] waypointArr;
+    Waypoint[] waypointArr;
     List<GameObject> waypoints;
     List<GameObject> reachedWaypoints;
     GameObject finalWaypoint;
     float variance;
     
-    
-
     // Start is called before the first frame update
     void Start()
     {
-        waypointArr = GameObject.FindGameObjectsWithTag("Waypoint");
-        waypoints.AddRange(waypointArr);
+        carController = GetComponent<CarController>();
+        waypointArr = FindObjectsByType<Waypoint>(FindObjectsSortMode.None);
+        waypoints = new List<GameObject>();
+        reachedWaypoints = new List<GameObject>();
+        for (int i = 0; i < waypointArr.Length; i++)
+        {
+            waypoints.Add(waypointArr[i].gameObject);
+        }
         variance = 1f / enemyData.skill;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         switch (currentState)
         {
             case EnemyState.LAPPING:
@@ -51,8 +56,9 @@ public class EnemyBehavior : MonoBehaviour
                         goalPosition = wp.transform.position;
                         chosenWP = wp;
                     }
+
                 }
-                
+                carController.SetInputs(0f, 1f, 0f);
                 break;
             case EnemyState.DESTROYING:
 
@@ -61,6 +67,11 @@ public class EnemyBehavior : MonoBehaviour
 
                 break;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        carController.UpdateCarController();
     }
 
     void CalculateGoals(float accel, float brake, float drift)
@@ -88,6 +99,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         waypoints.Remove(waypoint);
         reachedWaypoints.Add(waypoint);
+        Debug.Log(waypoint.name);
     }
 
     public void ResetWaypoints(GameObject finalWP)

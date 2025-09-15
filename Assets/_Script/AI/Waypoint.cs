@@ -11,10 +11,10 @@ public class Waypoint : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyBehavior>().ReachWaypoint(gameObject);
+            other.GetComponentInParent<EnemyBehavior>().ReachWaypoint(gameObject);
             if (isFinal)
             {
-                other.GetComponent<EnemyBehavior>().ResetWaypoints(gameObject);
+                other.GetComponentInParent<EnemyBehavior>().ResetWaypoints(gameObject);
             }
         }
     }
