@@ -8,14 +8,14 @@ public class Shooter : MonoBehaviour
     [Header("Projectle")]
     [SerializeField] GameObject projectilePrefab;
     [SerializeField, Tooltip("Radius")] float range;
-    [SerializeField, Tooltip("Shots per second")] int fireRate;
+    [SerializeField, Tooltip("Shot every x seconds")] int fireDelay;
     [SerializeField] float velocity;
 
     [Header("Targeting")]
     [SerializeField] Transform spawnPoint;
     [SerializeField, Range(0, 1)] float minimumPopularity = 0.5f;
 
-    FrequencyTimer shootTimer;
+    CountdownTimer shootTimer;
     OverlapTracker tracker;
     List<Projectile> activeProjectiles = new();
 
@@ -29,8 +29,8 @@ public class Shooter : MonoBehaviour
     {
         tracker = TryGetComponent(out OverlapTracker trk) ? trk : gameObject.AddComponent<OverlapTracker>();
         tracker.radius = range;
-        shootTimer = new(fireRate);
-        shootTimer.OnTick += Shoot;
+        shootTimer = new(fireDelay);
+        shootTimer.OnTimerStop += Shoot;
     }
 
     private void OnDestroy()
@@ -45,8 +45,12 @@ public class Shooter : MonoBehaviour
 
     void Shoot()
     {
+        shootTimer.Reset();
+        shootTimer.Start();
+
         if(tracker.Tracks.Count == 0) 
             return;
+
         List<Transform> validTargets = tracker.Tracks.FindAll(x => x.TryGetComponent(out Popularity pop) && pop.Value < minimumPopularity);
         Transform target = null;
 
@@ -66,7 +70,7 @@ public class Shooter : MonoBehaviour
         }
 
         Vector3 aimPosition = Targeter.FindIntercept(target.GetComponent<Rigidbody>(), spawnPoint, velocity);
-        Debug.DrawLine(spawnPoint.position, aimPosition, Color.yellow, 1 /fireRate);
+        Debug.DrawLine(spawnPoint.position, aimPosition, Color.yellow, fireDelay);
 
         Projectile shot = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity).GetComponent<Projectile>();
         shot.transform.up = aimPosition - spawnPoint.position;
