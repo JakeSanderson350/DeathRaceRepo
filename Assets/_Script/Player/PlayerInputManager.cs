@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInputManager : MonoBehaviour
 {
     CarController carController;
+    Drift driftController;
 
     private float steerInput, gasInput, brakeInput;
 
@@ -12,16 +13,17 @@ public class PlayerInputManager : MonoBehaviour
     void Start()
     {
         carController = GetComponent<CarController>();
+        driftController = GetComponent<Drift>();
     }
 
     private void OnEnable()
     {
-        
+        InputManager.inputDrift += HandbrakeDown;
     }
 
     private void OnDisable()
     {
-        
+        InputManager.inputDrift -= HandbrakeDown;
     }
 
     private void Update()
@@ -35,5 +37,10 @@ public class PlayerInputManager : MonoBehaviour
         steerInput = InputManager.steerInput;
         gasInput = InputManager.gasInput;
         brakeInput = InputManager.brakeInput;
+    }
+
+    private void HandbrakeDown()
+    {
+        driftController.DriftPressed();
     }
 }

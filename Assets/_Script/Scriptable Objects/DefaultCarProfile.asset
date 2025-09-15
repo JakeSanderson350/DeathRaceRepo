@@ -15,10 +15,10 @@ MonoBehaviour:
   maxAcceleration: 2500
   brakeAcceleration: 1500
   maxSpeed: 135
-  turnSensitivity: 1
-  maxSteerAngle: 30
-  airSteerForce: 300
-  airAcceleration: 10
+  turnSensitivity: 0.5
+  maxSteerAngle: 25
+  airSteerForce: 10000
+  airAcceleration: 50
   enableAirAcceleration: 1
-  _centerOfMass: {x: 0, y: 0, z: 0}
+  _centerOfMass: {x: 0, y: -0.6, z: 0}
   groundMagnetism: 1

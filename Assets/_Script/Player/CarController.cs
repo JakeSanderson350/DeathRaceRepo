@@ -1,27 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
 
+
+public enum Axel
+{
+    Front,
+    Rear
+}
+
+[Serializable]
+public struct Wheel
+{
+    public GameObject wheelModel;
+    public WheelCollider wheelCollider;
+    //public GameObject wheelEffectObj;
+    //public ParticleSystem smokeParticle;
+    public Axel axel;
+}
+
 public class CarController : MonoBehaviour
 {
-    public enum Axel
-    {
-        Front,
-        Rear
-    }
-
-    [Serializable]
-    public struct Wheel
-    {
-        public GameObject wheelModel;
-        public WheelCollider wheelCollider;
-        //public GameObject wheelEffectObj;
-        //public ParticleSystem smokeParticle;
-        public Axel axel;
-    }
-
     [SerializeField] private CarStats carProfile;
 
     [Header("Wheels")]
@@ -37,7 +39,7 @@ public class CarController : MonoBehaviour
     public bool isGrounded;
     public float lastJumpTime;
 
-    public float gasInput, brakeInput;
+    float gasInput, brakeInput;
     float steerInput;
 
     private Rigidbody carRb;
@@ -99,8 +101,7 @@ public class CarController : MonoBehaviour
         if (!isGrounded)
             return;
 
-        // Only brake when holding spacebar (not just toggling drift)
-        if (brakeInput > 0) // Only brake while holding after initial press
+        if (brakeInput > 0)
         {
             currentTorque += brakeInput * carProfile.brakeAcceleration * -1;
         }
@@ -117,7 +118,7 @@ public class CarController : MonoBehaviour
 
                 float lerpSpeed = 0.6f;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed);
-                wheel.wheelModel.transform.eulerAngles = new Vector3(0.0f, Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), 0.0f);
+                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, Mathf.Clamp(Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), -carProfile.maxSteerAngle, carProfile.maxSteerAngle), 0.0f);
             }
         }
     }

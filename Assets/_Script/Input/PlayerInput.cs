@@ -343,6 +343,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Handbrake"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc551bd0-65dd-4bf8-9c3a-555994e668ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -455,6 +464,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""962e8b2c-9b43-4536-be07-615113859972"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Handbrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dce57e9-5812-4932-ab1d-f6139e8d18df"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Handbrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -476,6 +507,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Driving_Steer = m_Driving.FindAction("Steer", throwIfNotFound: true);
         m_Driving_Gas = m_Driving.FindAction("Gas", throwIfNotFound: true);
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
+        m_Driving_Handbrake = m_Driving.FindAction("Handbrake", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -671,6 +703,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Steer;
     private readonly InputAction m_Driving_Gas;
     private readonly InputAction m_Driving_Brake;
+    private readonly InputAction m_Driving_Handbrake;
     public struct DrivingActions
     {
         private @PlayerInput m_Wrapper;
@@ -678,6 +711,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Steer => m_Wrapper.m_Driving_Steer;
         public InputAction @Gas => m_Wrapper.m_Driving_Gas;
         public InputAction @Brake => m_Wrapper.m_Driving_Brake;
+        public InputAction @Handbrake => m_Wrapper.m_Driving_Handbrake;
         public InputActionMap Get() { return m_Wrapper.m_Driving; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -696,6 +730,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Brake.started += instance.OnBrake;
             @Brake.performed += instance.OnBrake;
             @Brake.canceled += instance.OnBrake;
+            @Handbrake.started += instance.OnHandbrake;
+            @Handbrake.performed += instance.OnHandbrake;
+            @Handbrake.canceled += instance.OnHandbrake;
         }
 
         private void UnregisterCallbacks(IDrivingActions instance)
@@ -709,6 +746,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Brake.started -= instance.OnBrake;
             @Brake.performed -= instance.OnBrake;
             @Brake.canceled -= instance.OnBrake;
+            @Handbrake.started -= instance.OnHandbrake;
+            @Handbrake.performed -= instance.OnHandbrake;
+            @Handbrake.canceled -= instance.OnHandbrake;
         }
 
         public void RemoveCallbacks(IDrivingActions instance)
@@ -743,5 +783,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSteer(InputAction.CallbackContext context);
         void OnGas(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
+        void OnHandbrake(InputAction.CallbackContext context);
     }
 }
