@@ -18,12 +18,14 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.inputDrift += HandbrakeDown;
+        InputManager.inputDriftDown += HandbrakeDown;
+        InputManager.inputDriftUp += HandbrakeUp;
     }
 
     private void OnDisable()
     {
-        InputManager.inputDrift -= HandbrakeDown;
+        InputManager.inputDriftDown -= HandbrakeDown;
+        InputManager.inputDriftUp -= HandbrakeUp;
     }
 
     private void Update()
@@ -41,6 +43,11 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandbrakeDown()
     {
-        driftController.DriftPressed();
+        driftController.DriftDown();
+    }
+
+    private void HandbrakeUp()
+    {
+        driftController.DriftUp();
     }
 }

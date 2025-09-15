@@ -22,10 +22,15 @@ public class Drift : MonoBehaviour
         StoreFrictionCurves();
     }
 
-    public void DriftPressed()
+    public void DriftDown()
     {
         if (isGrounded)
-            isDrifting = !isDrifting;
+            isDrifting = true;
+    }
+
+    public void DriftUp()
+    {
+        isDrifting = false;
     }
 
     // Update is called once per frame
