@@ -35,6 +35,7 @@ public class TrickController : MonoBehaviour
     private TrickState currentState;
     private bool isGrounded, isBufferActive;
     private float groundedDistance = 0.7f;
+    public float jumpForce = 20000.0f;
     private Vector2 moveInput;
 
     private Queue<Inputs> inputQueue = new Queue<Inputs>();
@@ -89,6 +90,7 @@ public class TrickController : MonoBehaviour
     {
         if (isGrounded && currentState != TrickState.InTrick)
         {
+            currentState = TrickState.InTrick;
             StartCoroutine(BufferInputs());
         }
     }
@@ -118,12 +120,12 @@ public class TrickController : MonoBehaviour
                 case Inputs.Up:
                     i = inputQueue.Count;
                     moveInputted = true;
-                    //StartCoroutine(DoTrick("CarLaserflip"));
+                    StartCoroutine(DoTrick("CarLaserflip"));
                     break;
                 case Inputs.Down:
                     i = inputQueue.Count;
                     moveInputted = true;
-                    //StartCoroutine(DoTrick("CarTreflip"));
+                    StartCoroutine(DoTrick("CarTreflip"));
                     break;
             }
         }
@@ -131,7 +133,8 @@ public class TrickController : MonoBehaviour
         // if nothing inputted jump
         if (!moveInputted)
         {
-            carRB.AddForce(transform.up * 15000, ForceMode.Impulse);
+            carRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            currentState = TrickState.Normal;
         }
     }
 
@@ -152,7 +155,7 @@ public class TrickController : MonoBehaviour
         Debug.Log(trickName);
 
         // Pop car up
-        carRB.AddForce(transform.up * 15000, ForceMode.Impulse);
+        carRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
         // Add trick specific forces
         //if (trickName == "CarKickflip")

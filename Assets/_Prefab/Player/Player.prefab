@@ -266,6 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691292405188476492}
+  - component: {fileID: 1735478343038303177}
   m_Layer: 0
   m_Name: Camera Anchor
   m_TagString: Untagged
@@ -289,6 +290,23 @@ Transform:
   - {fileID: 7758868216135895021}
   m_Father: {fileID: 5403260301921095647}
   m_LocalEulerAnglesHint: {x: 4, y: 0, z: 0}
+--- !u!114 &1735478343038303177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4453175297608361439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958ea8d20a9ba944ea8d5a63d8dc0f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSmoothness: 25
+  rotSmoothness: 10
+  moveOffset: {x: 0, y: 3, z: -8}
+  rotOffset: {x: 0, y: 2, z: 0}
+  carTarget: {fileID: 5403260301921095647}
 --- !u!1 &7331509312815024869
 GameObject:
   m_ObjectHideFlags: 0
