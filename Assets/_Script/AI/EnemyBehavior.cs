@@ -54,11 +54,12 @@ public class EnemyBehavior : MonoBehaviour
                     if (Vector3.Distance(transform.position, wp.transform.position) <= dist)
                     {
                         goalPosition = wp.transform.position;
+                        dist = Vector3.Distance(transform.position, wp.transform.position);
                         chosenWP = wp;
                     }
 
                 }
-                carController.SetInputs(0f, 1f, 0f);
+                carController.SetInputs(DetermineSteering(goalPosition), 1f, 0f);
                 break;
             case EnemyState.DESTROYING:
 
@@ -81,16 +82,27 @@ public class EnemyBehavior : MonoBehaviour
         
     }
 
+    float DetermineSteering(Vector3 goalPos)
+    {
+        float steer = 0f;
+
+        float angleBetween = Vector3.SignedAngle(transform.forward, goalPos, Vector3.up);
+        Debug.Log(angleBetween);
+
+        float t = Mathf.InverseLerp(-180f, 180f, angleBetween);
+        steer = Mathf.Lerp(-1f, 1f, t);
+        Debug.Log(steer);
+
+        return -steer * 0.2f;
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("TrackZone"))
         {
             ZoneProfile zoneData = other.GetComponent<TrackZone>().profile;
             CalculateGoals(zoneData.accelerate, zoneData.brake, zoneData.drift);
-            
-        }
-        if (other.CompareTag("Waypoint"))
-        {
             
         }
     }
@@ -100,6 +112,7 @@ public class EnemyBehavior : MonoBehaviour
         waypoints.Remove(waypoint);
         reachedWaypoints.Add(waypoint);
         Debug.Log(waypoint.name);
+
     }
 
     public void ResetWaypoints(GameObject finalWP)
