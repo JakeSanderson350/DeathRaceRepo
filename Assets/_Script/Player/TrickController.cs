@@ -28,18 +28,16 @@ public class TrickController : MonoBehaviour
         Laserflip
     }
 
+    [SerializeField] private CarStats carProfile;
 
     [Header("Car State")]
     [SerializeField] private Animator carAnimator;
     [SerializeField] private BoxCollider carHitbox;
     private TrickState currentState;
     private bool isGrounded, isBufferActive;
-    private float groundedDistance = 0.7f;
-    public float jumpForce = 20000.0f;
     private Vector2 moveInput;
 
     private Queue<Inputs> inputQueue = new Queue<Inputs>();
-    public float inputBufferLength = 0.2f;
 
     private Rigidbody carRB;
 
@@ -133,7 +131,7 @@ public class TrickController : MonoBehaviour
         // if nothing inputted jump
         if (!moveInputted)
         {
-            carRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            carRB.AddForce(transform.up * carProfile.jumpForce, ForceMode.Impulse);
             currentState = TrickState.Normal;
         }
     }
@@ -142,7 +140,7 @@ public class TrickController : MonoBehaviour
     {
         isBufferActive = true;
 
-        yield return new WaitForSeconds(inputBufferLength);
+        yield return new WaitForSeconds(carProfile.inputBufferLength);
 
         isBufferActive = false;
         EvaluateBuffer();
@@ -155,7 +153,7 @@ public class TrickController : MonoBehaviour
         Debug.Log(trickName);
 
         // Pop car up
-        carRB.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        carRB.AddForce(transform.up * carProfile.jumpForce, ForceMode.Impulse);
 
         // Add trick specific forces
         //if (trickName == "CarKickflip")

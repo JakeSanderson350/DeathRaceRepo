@@ -24,4 +24,8 @@ public class CarStats : ScriptableObject
     [Header("Physics")]
     public Vector3 _centerOfMass;
     public float groundMagnetism = 1.0f;
+
+    [Header("Tricks")]
+    public float jumpForce = 20000.0f;
+    public float inputBufferLength = 0.2f;
 }

@@ -39,8 +39,8 @@ public class CarController : MonoBehaviour
     public bool isGrounded;
     public float lastJumpTime;
 
-    float gasInput, brakeInput;
-    float steerInput;
+    float gasInput, brakeInput, steerInput;
+    private bool jumpPressedRecently = false;
 
     private Rigidbody carRb;
 
@@ -53,9 +53,24 @@ public class CarController : MonoBehaviour
 
     public void SetInputs(float _steer, float _gas, float _brake)
     {
-        steerInput = _steer;
+        
+        steerInput = jumpPressedRecently ? 0.0f : _steer; //No steer input when doing trick input
         gasInput = _gas;
         brakeInput = _brake;
+    }
+
+    public void JumpDown()
+    {
+        if (isGrounded)
+        {
+            jumpPressedRecently = true;
+            Invoke("ResetJump", carProfile.inputBufferLength);
+        }
+    }
+
+    private void ResetJump()
+    {
+        jumpPressedRecently = false;
     }
 
     // Update is called once per frame

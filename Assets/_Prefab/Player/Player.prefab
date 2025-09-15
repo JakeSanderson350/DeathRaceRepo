@@ -254,9 +254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b222c76ed66714c4f9a62b3d44737c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carProfile: {fileID: 11400000, guid: 418dcbd34bf787740880863bea135f86, type: 2}
   carAnimator: {fileID: 7780957064885755089}
   carHitbox: {fileID: 0}
-  inputBufferLength: 0.2
 --- !u!1 &4453175297608361439
 GameObject:
   m_ObjectHideFlags: 0
