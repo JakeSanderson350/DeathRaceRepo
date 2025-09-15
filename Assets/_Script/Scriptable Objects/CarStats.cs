@@ -23,7 +23,10 @@ public class CarStats : ScriptableObject
 
     [Header("Physics")]
     public Vector3 _centerOfMass;
+    public float gravity = 9.8f;
     public float groundMagnetism = 1.0f;
+    public float magnetismDistance = 20.0f;
+    public LayerMask roadLayer;
 
     [Header("Tricks")]
     public float jumpForce = 20000.0f;

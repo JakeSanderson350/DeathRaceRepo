@@ -47,8 +47,8 @@ public class Drift : MonoBehaviour
                     float tireGripFactor = TireGripLookUpCurve(GetDriftAngle());
                     WheelFrictionCurve sidewaysFriction = originalSidewaysFriction[i];
 
-                    sidewaysFriction.extremumValue *= 0.2f;
-                    sidewaysFriction.asymptoteValue *= 0.2f;
+                    sidewaysFriction.extremumValue *= 1.0f;
+                    sidewaysFriction.asymptoteValue *= 1.0f;
 
                     Debug.Log(sidewaysFriction.extremumValue);
 
