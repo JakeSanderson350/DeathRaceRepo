@@ -59,7 +59,7 @@ public class EnemyBehavior : MonoBehaviour
                     }
 
                 }
-                carController.SetInputs(DetermineSteering(goalPosition), 1f, 0f);
+                carController.SetInputs(DetermineSteering(goalPosition), DetermineAcceleration(goalPosition), 0f);
                 break;
             case EnemyState.DESTROYING:
 
@@ -87,15 +87,27 @@ public class EnemyBehavior : MonoBehaviour
         float steer = 0f;
 
         float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
-        //float signedAngleBetween = Vector3.SignedAngle(transform.forward, goalPos - transform.position, Vector3.up);
-        Debug.Log(angleBetween);
-
         float t = Mathf.InverseLerp(0, 180f, angleBetween);
         steer = Mathf.Lerp(-1f, 1f, t);
-        Debug.Log(steer);
 
         return steer * 0.1f;
         
+    }
+
+    float DetermineAcceleration(Vector3 goalPos)
+    {
+        float accel = 0f;
+        float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
+        if (angleBetween > 15)
+        {
+            accel = 0.7f;
+        }
+        else
+        {
+            accel = 1f;
+        }
+
+        return accel;
     }
 
     private void OnTriggerEnter(Collider other)
