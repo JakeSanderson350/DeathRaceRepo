@@ -31,4 +31,12 @@ public class FrameRegular : Frame
             float damageToThis = ImpactController.Instance.ArmoredDamageBase * dot * ImpactController.Instance.DamageMultiplier * vec2.magnitude;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Frame"))
+        {
+            HandleImpact(other.GetComponent<Frame>());
+        }
+    }
 }

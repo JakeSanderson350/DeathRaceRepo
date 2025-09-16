@@ -24,4 +24,12 @@ public class FrameArmored : Frame
             
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Frame"))
+        {
+            HandleImpact(other.GetComponent<Frame>());
+        }
+    }
 }

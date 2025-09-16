@@ -32,4 +32,12 @@ public class FrameVulnerable : Frame
 
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Frame"))
+        {
+            HandleImpact(other.GetComponent<Frame>());
+        }
+    }
 }
