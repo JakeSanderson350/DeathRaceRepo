@@ -85,18 +85,10 @@ public class EnemyBehavior : MonoBehaviour
 
     float DetermineSteering(Vector3 goalPos)
     {
-        float steer = 0f;
+        float steer = Vector3.SignedAngle(transform.forward, goalPos - transform.position, Vector3.up) / 180f;
+        Debug.DrawLine(transform.position + transform.up * 2,  transform.position + transform.up * 2 + transform.right * steer * 3, Color.magenta);
 
-        
-        //float angleBetween = Vector3.Angle(transform.forward, goalPos - transform.position);
-        float signedAngleBetween = Vector3.SignedAngle(transform.forward, goalPos - transform.position, Vector3.up);
-        //float angleBetween = Vector3.Dot(transform.forward, goalPos - transform.position);
-        //Debug.DrawLine(transform.position + transform.up * 2,  transform.position + transform.up * 2 + Quaternion uhauhuha fuck math);
-
-        steer = Mathf.Lerp(-1f, 1f, Mathf.InverseLerp(-180f, 180f, signedAngleBetween));
-        //Debug.Log(steer);
-
-        return steer ;
+        return steer;
         
     }
 
