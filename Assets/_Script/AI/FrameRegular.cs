@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrameVulnerable : Frame
+public class FrameRegular : Frame
 {
     public override void HandleImpact(Frame other)
     {
