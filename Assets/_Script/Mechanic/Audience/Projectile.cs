@@ -26,18 +26,30 @@ public class Projectile : MonoBehaviour
 
     void Explode()
     {
-        List<Collider> hits = Physics.OverlapSphere(transform.position, radius, mask).ToList();
+        //add all over the racers hit 
+        List<Popularity> racersHit = new();
+        Physics.OverlapSphere(transform.position, radius, mask).ToList().FindAll(x => x.GetComponentInParent<Popularity>() != null).ForEach(x => racersHit.Add(x.GetComponentInParent<Popularity>())); //THE LAMBDA EXPRESSION FROM HELL >:^D
+        racersHit = racersHit.Distinct().ToList(); //remove duplicates
 
-        foreach (Collider c in hits.ToList())
+#if UNITY_EDITOR
+        //Debug.Log("Rocket Exp");
+        racersHit.ForEach(x => Debug.DrawLine(transform.position, x.transform.position, Color.red, 2f));
+#endif
+
+        foreach (Popularity pop in racersHit)
         {
-            if(c.transform.TryGetComponent(out Popularity pop))
-            {
-                pop.Value -= damage; //this is bad fix later
-                c.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
-            }
+            //Debug.Log(pop.name + " hit for " + damage);
+            pop.Value -= damage; //this is bad fix later
+            pop.GetComponent<Rigidbody>().AddExplosionForce(force, transform.position, radius);
         }
 
         onExplode?.Invoke(this);
         gameObject.SetActive(false);
+        Invoke("DestorySelf", 1f);
+    }
+
+    void DestorySelf()
+    {
+        Destroy(gameObject);
     }
 }
