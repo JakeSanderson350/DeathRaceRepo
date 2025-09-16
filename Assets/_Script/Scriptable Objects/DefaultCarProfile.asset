@@ -15,8 +15,8 @@ MonoBehaviour:
   maxAcceleration: 2500
   brakeAcceleration: 1500
   maxSpeed: 135
-  turnSensitivity: 1
-  maxSteerAngle: 20
+  turnSensitivity: 0.5
+  maxSteerAngle: 25
   airSteerForce: 10000
   airAcceleration: 50
   enableAirAcceleration: 1
@@ -26,6 +26,6 @@ MonoBehaviour:
   magnetismDistance: 20
   roadLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   jumpForce: 20000
   inputBufferLength: 0.2
