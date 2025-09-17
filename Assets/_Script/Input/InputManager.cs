@@ -49,8 +49,12 @@ public class InputManager : MonoBehaviour
         controls.Disable();   
     }
 
-    /*void EnableControls(InputManager.Profile profile)
+    private void Update()
     {
-        
-    }*/
+        if(Input.GetKeyDown(KeyCode.Escape)) //debug
+        {
+            Cursor.visible = !Cursor.visible;
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+    }
 }

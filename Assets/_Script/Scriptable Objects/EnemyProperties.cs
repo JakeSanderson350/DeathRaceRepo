@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyProfile", menuName = "Enemy/Enemy Profile")]
-public class EnemyData : ScriptableObject
+public class EnemyProperties : ScriptableObject
 {
     [Header("Behavior")]
     [Tooltip("Affects the likelihood of an enemy to attempt to target and destroy a nearby car" +

@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] EnemyState currentState;
-    [SerializeField] EnemyData enemyData;
+    [SerializeField] EnemyProperties enemyData;
     CarController carController;
 
     float velocityGoal;

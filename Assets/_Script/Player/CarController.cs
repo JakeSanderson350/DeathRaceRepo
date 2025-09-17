@@ -24,7 +24,7 @@ public struct Wheel
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField] private CarStats carProfile;
+    [SerializeField] private CarProperties carProfile;
 
     [Header("Wheels")]
     public List<Wheel> wheels;

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static CarController;
 
-[CreateAssetMenu(fileName = "New CarStats", menuName = "Player/CarStats")]
-public class CarStats : ScriptableObject
+[CreateAssetMenu(fileName = "New Car Properties", menuName = "Vehicle/CarProperties")]
+public class CarProperties : ScriptableObject
 {
     [Header("Performance")]
     public float maxAcceleration = 2500.0f;

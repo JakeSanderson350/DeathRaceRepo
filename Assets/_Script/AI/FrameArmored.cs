@@ -1,35 +1,38 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 public class FrameArmored : Frame
 {
     public override void HandleImpact(Frame other)
     {
+        base.HandleImpact(other);
+
+        if (other.transform.parent == transform.parent) return;
+
         Vector3 vec1 = GetComponentInParent<Rigidbody>().velocity;
         Vector3 vec2 = other.GetComponentInParent<Rigidbody>().velocity;
         float dot = Vector3.Dot(vec1.normalized, vec2.normalized);
         dot *= -1; // reverse values so that a more negative dot product results in a higher damage value
         dot += 1; // make all possible dot values positive
         dot /= 2; // clamp from 0 to 1
-        Frame frame2;
-        if (other.GetType() == typeof(FrameArmored))
+
+        float damageToThis = other.impactProperties.DamageBase * dot * other.impactProperties.DamageMultiplier * vec2.magnitude;
+
+        switch (other)
         {
-            frame2 = other as FrameArmored;
-            float damageToThis = ImpactController.Instance.ArmoredDamageBase * dot * ImpactController.Instance.DamageMultiplier * vec2.magnitude;
-            
-            // Damage Health, Damage popularity
-            
+            case FrameArmored armored:
+                //stub
+                break;
+            case FrameRegular regular:
+                popularity.Value += damageToThis / 2;
+                break;
+            case FrameVulnerable vulnerable:
+                popularity.Value += damageToThis;
+                break;
         }
+
+
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Frame"))
-        {
-            HandleImpact(other.GetComponent<Frame>());
-        }
-    }
 }
