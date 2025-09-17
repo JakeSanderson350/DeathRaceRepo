@@ -18,16 +18,21 @@ public class Shooter : MonoBehaviour
     CountdownTimer shootTimer;
     OverlapTracker tracker;
     List<Projectile> activeProjectiles = new();
-
+    List<Transform> validTargets = new();
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(spawnPoint.position, Vector3.one * 0.5f);
     }
 
-    private void Awake()
+    private void OnValidate()
     {
         tracker = TryGetComponent(out OverlapTracker trk) ? trk : gameObject.AddComponent<OverlapTracker>();
+        tracker.radius = range;
+    }
+
+    private void Awake()
+    {
         tracker.radius = range;
         shootTimer = new(fireDelay);
         shootTimer.OnTimerStop += Shoot;
@@ -51,24 +56,24 @@ public class Shooter : MonoBehaviour
         if(tracker.Tracks.Count == 0) 
             return;
 
-        List<Transform> validTargets = tracker.Tracks.FindAll(x => x.parent.TryGetComponent(out Popularity pop) && pop.Value <= minimumPopularity);
-        Transform target = null;
+        //clear valid targets list
+        validTargets.Clear();
+        foreach (var x in tracker.Tracks)
+        {
+            if(x.GetComponentInParent<Popularity>() != null)
+                validTargets.Add(x.GetComponentInParent<Popularity>().transform);
+        }
+        
+        //filter sort valid targets
+        validTargets.RemoveAll(x => x.GetComponent<Popularity>().Value > minimumPopularity);
 
         if(validTargets.Count <= 0)
             return;
 
-        foreach(Transform t in validTargets)
-        {
-            if(target == null)
-            {
-                target = t;
-                continue;
-            }
+        Transform target = validTargets[0];
+        validTargets.ForEach(x => target = x.GetComponent<Popularity>().Value <= target.GetComponent<Popularity>().Value ? x : target);
 
-            if(t.GetComponent<Popularity>().Value <= target.GetComponent<Popularity>().Value)
-                target = t;
-        }
-
+        //get aim pos of target
         Vector3 aimPosition = Targeter.FindIntercept(target.GetComponent<Rigidbody>(), spawnPoint, velocity);
         Debug.DrawLine(spawnPoint.position, aimPosition, Color.yellow, fireDelay);
 

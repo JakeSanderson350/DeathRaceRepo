@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverlapTracker : MonoBehaviour
 {
-    public List<Transform> Tracks { get => tracks; }
+    public List<Transform> Tracks { get => GetTracks(); }
 
     public float radius = 5f;
 
@@ -33,5 +33,11 @@ public class OverlapTracker : MonoBehaviour
     {
         tracks.Remove(other.transform);
         tracks.RemoveAll(x => !x);
+    }
+
+    List<Transform> GetTracks()
+    {
+        tracks.RemoveAll(x => !x);
+        return tracks;
     }
 }

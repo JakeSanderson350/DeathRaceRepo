@@ -28,7 +28,7 @@ public class TrickController : MonoBehaviour
         Laserflip
     }
 
-    [SerializeField] private CarStats carProfile;
+    [SerializeField] private CarProperties carProfile;
 
     [Header("Car State")]
     [SerializeField] private Animator carAnimator;
