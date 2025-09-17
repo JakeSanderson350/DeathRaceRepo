@@ -24,7 +24,7 @@ public struct Wheel
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField] private CarStats carProfile;
+    [SerializeField] private CarProperties carProfile;
 
     [Header("Wheels")]
     public List<Wheel> wheels;
@@ -33,13 +33,14 @@ public class CarController : MonoBehaviour
     [Header("Speed Info (Read Only)")]
     public float currentSpeed; //in m/s
     public float currentSpeedMPH; //speed in mp/h for guage
+    private float forwardSpeed;
     public TextMeshProUGUI speedGauge;
 
     [Header("Jump Info (Read Only)")]
     public bool isGrounded;
     public float lastJumpTime;
 
-    float gasInput, brakeInput, steerInput;
+    float gasInput, brakeInput, steerInput, steerAngle;
     private bool jumpPressedRecently = false;
 
     private RaycastHit hit;
@@ -129,11 +130,12 @@ public class CarController : MonoBehaviour
         {
             if (wheel.axel == Axel.Front)
             {
-                var _steerAngle = steerInput * carProfile.turnSensitivity * carProfile.maxSteerAngle;
+                var _steerAngle = steerInput * Mathf.Lerp(carProfile.maxSteerAngle, carProfile.maxSteerAngleAtMaxSpeed, Mathf.InverseLerp(0, carProfile.maxSpeed, Mathf.Abs(forwardSpeed))); ;
+                steerAngle = Mathf.Lerp(steerAngle, _steerAngle, carProfile.turnSensitivity * Time.fixedDeltaTime);
 
-                float lerpSpeed = 0.6f;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed);
-                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, Mathf.Clamp(Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, lerpSpeed), -carProfile.maxSteerAngle, carProfile.maxSteerAngle), 0.0f);
+
+                wheel.wheelCollider.steerAngle = steerAngle;
+                wheel.wheelModel.transform.localEulerAngles = new Vector3(0.0f, steerAngle, 0.0f);
             }
         }
     }
@@ -181,6 +183,7 @@ public class CarController : MonoBehaviour
 
     void UpdateSpeedInfo()
     {
+        forwardSpeed = Vector3.Dot(transform.forward, carRb.velocity);
         currentSpeed = carRb.velocity.magnitude;
         currentSpeedMPH = currentSpeed * 2.237f; //conversion
         //speedGauge.text = Mathf.Round(currentSpeedMPH).ToString() + " MPH";

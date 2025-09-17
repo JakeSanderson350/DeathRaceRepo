@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = currentLevel.enableMouseOnLoad;
         Cursor.lockState = currentLevel.enableMouseOnLoad ? CursorLockMode.None : CursorLockMode.Locked;
-
-
     }
 
     public void LoadScene(string name)

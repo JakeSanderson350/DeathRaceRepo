@@ -19,7 +19,7 @@ public class Resource : MonoBehaviour, IResource
     private float max;
     private float min;
 
-    [SerializeField] ResourceStats stats;
+    [SerializeField] ResourceProperties stats;
 
     private void Awake()
     {
@@ -27,7 +27,6 @@ public class Resource : MonoBehaviour, IResource
         max = stats.max;
         min = stats.min;
     }
-
 
     protected virtual void SetValue(float num)
     {
