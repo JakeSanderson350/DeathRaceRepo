@@ -15,6 +15,7 @@ public class CarStats : ScriptableObject
     [Header("Steering")]
     public float turnSensitivity = 1.0f;
     public float maxSteerAngle = 30.0f;
+    public float maxSteerAngleAtMaxSpeed = 5.0f;
 
     [Header("Air Control")]
     public float airSteerForce = 300f;

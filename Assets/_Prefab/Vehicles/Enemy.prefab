@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2685463619164045416
+--- !u!1001 &1414347459539262694
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,30 +8,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2544517819230756238, guid: 36ba9908f4114f04085917c514389acf,
+    - target: {fileID: 768093724999598433, guid: 36ba9908f4114f04085917c514389acf,
         type: 3}
-      propertyPath: wheels.Array.data[0].wheelModel
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 4625941730404872542}
-    - target: {fileID: 2544517819230756238, guid: 36ba9908f4114f04085917c514389acf,
-        type: 3}
-      propertyPath: wheels.Array.data[1].wheelModel
-      value: 
-      objectReference: {fileID: 4625941730404872542}
-    - target: {fileID: 2544517819230756238, guid: 36ba9908f4114f04085917c514389acf,
-        type: 3}
-      propertyPath: wheels.Array.data[2].wheelModel
-      value: 
-      objectReference: {fileID: 4625941730404872542}
-    - target: {fileID: 2544517819230756238, guid: 36ba9908f4114f04085917c514389acf,
-        type: 3}
-      propertyPath: wheels.Array.data[3].wheelModel
-      value: 
-      objectReference: {fileID: 4625941730404872542}
+      objectReference: {fileID: 0}
     - target: {fileID: 4009770588808045645, guid: 36ba9908f4114f04085917c514389acf,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5403260301921095647, guid: 36ba9908f4114f04085917c514389acf,
         type: 3}
@@ -83,42 +68,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7660440636356261113, guid: 36ba9908f4114f04085917c514389acf,
+    - target: {fileID: 8916427004207002418, guid: 36ba9908f4114f04085917c514389acf,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.263
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 910144893809207983, guid: 36ba9908f4114f04085917c514389acf, type: 3}
     m_RemovedGameObjects:
-    - {fileID: 8916427004207002418, guid: 36ba9908f4114f04085917c514389acf, type: 3}
+    - {fileID: 4353891065353902597, guid: 36ba9908f4114f04085917c514389acf, type: 3}
+    - {fileID: 4453175297608361439, guid: 36ba9908f4114f04085917c514389acf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4009770588808045645, guid: 36ba9908f4114f04085917c514389acf,
         type: 3}
       insertIndex: 2
-      addedObject: {fileID: 6302683087099387581}
+      addedObject: {fileID: 3530718189887140787}
   m_SourcePrefab: {fileID: 100100000, guid: 36ba9908f4114f04085917c514389acf, type: 3}
---- !u!1 &1360438887921771557 stripped
+--- !u!1 &2595573798944520363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4009770588808045645, guid: 36ba9908f4114f04085917c514389acf,
     type: 3}
-  m_PrefabInstance: {fileID: 2685463619164045416}
+  m_PrefabInstance: {fileID: 1414347459539262694}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6302683087099387581
+--- !u!114 &3530718189887140787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360438887921771557}
+  m_GameObject: {fileID: 2595573798944520363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fadb93237dbb5884d9b9ced593dad2b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b59bd48a837dc64b9713a1911161dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4625941730404872542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7311043760030363958, guid: 36ba9908f4114f04085917c514389acf,
-    type: 3}
-  m_PrefabInstance: {fileID: 2685463619164045416}
-  m_PrefabAsset: {fileID: 0}
+  currentState: 0
+  enemyData: {fileID: 11400000, guid: 807b918216b53c242a79818e40387696, type: 2}
