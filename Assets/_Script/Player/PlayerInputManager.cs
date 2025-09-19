@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    CarController carController;
-    Drift driftController;
-    TrickController trickController;
+    Vehicle vehicle;
 
     private float steerInput, gasInput, brakeInput;
     Vector2 moveInput;
@@ -14,9 +12,7 @@ public class PlayerInputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        carController = GetComponent<CarController>();
-        driftController = GetComponent<Drift>();
-        trickController = GetComponent<TrickController>();
+        vehicle = GetComponent<Vehicle>();
     }
 
     private void OnEnable()
@@ -37,8 +33,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         GetInput();
 
-        carController.SetInputs(steerInput, gasInput, brakeInput);
-        trickController.SetMoveInput(moveInput);
+        vehicle.SetInputs(steerInput, gasInput, brakeInput, moveInput);
     }
 
     private void GetInput()
@@ -51,16 +46,16 @@ public class PlayerInputManager : MonoBehaviour
 
     private void HandbrakeDown()
     {
-        driftController.DriftDown();
+        vehicle.HandbrakeDown();
     }
 
     private void HandbrakeUp()
     {
-        driftController.DriftUp();
+        vehicle.HandbrakeUp();
     }
 
     private void JumpDown()
     {
-        trickController.JumpDown();
+        vehicle.JumpDown();
     }
 }
