@@ -5,6 +5,7 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour
 {
     CarController carController;
+    Nitro nitro;
     Drift driftController;
     TrickController trickController;
 
@@ -14,6 +15,7 @@ public class Vehicle : MonoBehaviour
     void Start()
     {
         carController = GetComponent<CarController>();
+        nitro = GetComponent<Nitro>();
         driftController = GetComponent<Drift>();
         trickController = GetComponent<TrickController>();
     }
@@ -21,6 +23,7 @@ public class Vehicle : MonoBehaviour
     private void FixedUpdate()
     {
         carController.UpdateCarController();
+        nitro.UpdateNitro(carController.isGrounded);
         driftController.UpdateDrift(carController.isGrounded);
         trickController.UpdateTrickController(carController.isGrounded);
     }
@@ -48,6 +51,11 @@ public class Vehicle : MonoBehaviour
 
     public void JumpDown()
     {
-        trickController.JumpDown();
+        if (nitro.CanUseNitro())
+        {
+            nitro.UseNitro();
+
+            trickController.JumpDown();
+        }
     }
 }

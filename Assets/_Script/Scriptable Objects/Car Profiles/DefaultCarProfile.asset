@@ -17,6 +17,7 @@ MonoBehaviour:
   maxSpeed: 135
   turnSensitivity: 2
   maxSteerAngle: 25
+  maxSteerAngleAtMaxSpeed: 5
   airSteerForce: 10000
   airAcceleration: 50
   enableAirAcceleration: 1
@@ -29,3 +30,6 @@ MonoBehaviour:
     m_Bits: 0
   jumpForce: 20000
   inputBufferLength: 0.2
+  startNitro: 4
+  maxNitro: 6
+  nitroRechargeRate: 8

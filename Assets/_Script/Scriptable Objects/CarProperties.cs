@@ -31,4 +31,9 @@ public class CarProperties : ScriptableObject
     [Header("Tricks")]
     public float jumpForce = 20000.0f;
     public float inputBufferLength = 0.2f;
+
+    [Header("Nitro")]
+    public int startNitro = 4;
+    public int maxNitro = 6;
+    public float nitroRechargeRate = 4.0f;
 }
