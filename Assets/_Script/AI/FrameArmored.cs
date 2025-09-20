@@ -18,6 +18,7 @@ public class FrameArmored : Frame
         dot /= 2; // clamp from 0 to 1
 
         float damageToThis = other.impactProperties.DamageBase * dot * other.impactProperties.DamageMultiplier * vec2.magnitude;
+        // adjust the vec2.magnitude to instead use the directional velocity towards the impact point
 
         switch (other)
         {
