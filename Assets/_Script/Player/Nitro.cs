@@ -37,7 +37,7 @@ public class Nitro : MonoBehaviour
     }
 
     // Returns false if nitro not available, true if nitro gets used
-    public bool CanUseNitro()
+    private bool CanUseNitro()
     {
         if (isGrounded && nitroCount > 0)
         {
@@ -47,12 +47,16 @@ public class Nitro : MonoBehaviour
         return false;
     }
 
-    // Assumes CanUseNitro is true
-    public void UseNitro()
+    // Returns true if nitro is used false if no nitro left
+    public bool TryUseNitro()
     {
-        nitroCount--;
+        if (CanUseNitro())
+        {
+            nitroCount--;
+            return true;
+        }
 
-
+        return false;
     }
 
     private void RechargeNitro()

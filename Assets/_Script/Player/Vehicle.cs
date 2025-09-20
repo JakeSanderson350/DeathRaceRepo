@@ -51,10 +51,8 @@ public class Vehicle : MonoBehaviour
 
     public void JumpDown()
     {
-        if (nitro.CanUseNitro())
+        if (nitro.TryUseNitro())
         {
-            nitro.UseNitro();
-
             trickController.JumpDown();
         }
     }
