@@ -26,6 +26,7 @@ public abstract class Frame : MonoBehaviour
         if (other.collider.gameObject.CompareTag("Frame")) //UNITY IS DUMB, MAKE SURE TO ROUTE THROUGH COLLDER BEFORE GAMEOBJECT
         {
             HandleImpact(other.collider.gameObject.GetComponent<Frame>());
+            //other.contacts[0].normal
         }
     }
 }
