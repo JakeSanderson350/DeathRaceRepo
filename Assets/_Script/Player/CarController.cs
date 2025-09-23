@@ -193,8 +193,11 @@ public class CarController : MonoBehaviour
         forwardSpeed = Vector3.Dot(transform.forward, carRb.velocity);
         currentSpeed = carRb.velocity.magnitude;
         currentSpeedMPH = currentSpeed * 2.237f; //conversion
+
+        if(speedGauge != null)
         speedGauge.text = Mathf.Round(currentSpeedMPH).ToString();
 
+        if(needle != null)
         needle.transform.eulerAngles = new Vector3(0, 0, GetNeedleRotation());
 
     }
