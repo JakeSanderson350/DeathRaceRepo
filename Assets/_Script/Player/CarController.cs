@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum Axel
@@ -34,7 +35,13 @@ public class CarController : MonoBehaviour
     public float currentSpeed; //in m/s
     public float currentSpeedMPH; //speed in mp/h for guage
     private float forwardSpeed;
-    public TextMeshProUGUI speedGauge;
+    public TextMeshProUGUI speedGauge; //displays speed on speedometer
+    public Image needle;
+
+    //needle rotation info
+    public float maxSpeedForGauge = 100f;
+    private float maxSpeedAngle = -90;
+    private float zeroSpeedAngle = 90;
 
     [Header("Jump Info (Read Only)")]
     public bool isGrounded;
@@ -186,6 +193,18 @@ public class CarController : MonoBehaviour
         forwardSpeed = Vector3.Dot(transform.forward, carRb.velocity);
         currentSpeed = carRb.velocity.magnitude;
         currentSpeedMPH = currentSpeed * 2.237f; //conversion
-        //speedGauge.text = Mathf.Round(currentSpeedMPH).ToString() + " MPH";
+        speedGauge.text = Mathf.Round(currentSpeedMPH).ToString();
+
+        needle.transform.eulerAngles = new Vector3(0, 0, GetNeedleRotation());
+
+    }
+
+    private float GetNeedleRotation()
+    {
+        float normalizedSpeed = Mathf.Clamp01(currentSpeedMPH / maxSpeedForGauge); //makes the value between 0-1
+
+        float totalAngleSize = zeroSpeedAngle - maxSpeedAngle; //gets the angle size of 180 degrees
+
+        return zeroSpeedAngle - (normalizedSpeed * totalAngleSize);
     }
 }
