@@ -10,7 +10,7 @@ public class Nitro : MonoBehaviour
 
     public int NitroCount { get => nitroCount; }
 
-    private int nitroCount;
+    [SerializeField] private int nitroCount;
     private int nitroMax;
     private float nitroCooldown;
     private bool isGrounded;
@@ -23,6 +23,7 @@ public class Nitro : MonoBehaviour
     [Range(0f, 1f)]
     public float maxFillAmount = 0.65f; //fill amount when nitro is at max
 
+    public float normalizedNitro;
     public Image needle;
 
     //needle rotation info
@@ -109,7 +110,8 @@ public class Nitro : MonoBehaviour
     {
         if (nitroBar != null)
         {
-            float normalizedNitro = nitroCount / nitroMax;
+            float rechargeParam = (1 - (rechargeTimer.CurrentTime/nitroCooldown))/(float)nitroMax;
+            normalizedNitro = Mathf.Clamp01(((float)nitroCount / (float)nitroMax) + rechargeParam);
             float targetFillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, normalizedNitro);
 
             nitroBar.fillAmount = Mathf.Lerp(nitroBar.fillAmount, targetFillAmount, Time.deltaTime * 5f);

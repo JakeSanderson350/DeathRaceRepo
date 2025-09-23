@@ -30,6 +30,6 @@ MonoBehaviour:
     m_Bits: 0
   jumpForce: 20000
   inputBufferLength: 0.2
-  startNitro: 2
+  startNitro: 0
   maxNitro: 3
   nitroRechargeRate: 8
